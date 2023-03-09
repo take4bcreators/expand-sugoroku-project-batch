@@ -1,0 +1,25 @@
+# Project
+env/*
+tmp/*
+private/*
+*.log
+*.tmp
+*.env
+!*.template
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# General
+!.gitkeep
