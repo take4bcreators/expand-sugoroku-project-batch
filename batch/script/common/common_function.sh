@@ -35,17 +35,22 @@ if [ -z "${MOD_GRP_NAME}" ]; then
     exit 1
 fi
 
+
 # 出力ファイル設定
+
+# 標準出力用の一時ファイル
 STD_OUT_FILE="${TMP_DIR}/std_out_$$.tmp"
+# エラー出力用の一時ファイル
 STD_ERR_FILE="${TMP_DIR}/std_err_$$.tmp"
-# LOG_FILE_NAME="${LOG_DIR}/${MOD_GRP_NAME}/${MOD_GRP_NAME}_$(date +%Y%m%d).log"
+# ログファイルのパス（形式：機能名_日付.log）
 LOG_FILE_NAME="${LOG_DIR}/${MOD_GRP_NAME}_$(date +%Y%m%d).log"
+# LOG_FILE_NAME="${LOG_DIR}/${MOD_GRP_NAME}/${MOD_GRP_NAME}_$(date +%Y%m%d).log"
 
 
 # 【ログ出力用関数】
-#   [引数1] 重要度を示す変数
+#   [引数1] 重要度を示す変数 … ${ERR} ${WARN} ${INFO} ${DEBUG}
 #   [引数2] ログに出力するメッセージ
-#   [使用例] log_msg $INFO "実行開始"
+#   [使用例] log_msg ${INFO} "実行開始"
 #   [ログ出力例] 2022-01-01 10:01:36 INFO pid:3001 import_mst_prefectures_csv.sh 実行開始
 function log_msg() {
     local logdata="$(date '+%Y-%m-%d %H:%M:%S')"
