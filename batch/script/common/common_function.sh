@@ -72,7 +72,7 @@ function dumpinfo() {
 
 
 # 【標準出力ファイルの削除関数】
-#   [引数] なし
+#   [引数] 削除対象ファイルのフルパス（省略可能、複数指定可能）
 #   [使用例] removetmp
 #   [依存] logmsg関数
 function removetmp() {
@@ -83,6 +83,13 @@ function removetmp() {
     if [ -f "${STD_ERR_FILE}" ]; then
         rm "${STD_ERR_FILE}"
         logmsg ${LL_INFO} "一時ファイル削除：${STD_ERR_FILE}"
+    fi
+    # 引数が指定された場合はそのファイルを削除
+    if [ $# != 0 ]; then
+        for file_path; do
+            rm "${file_path}"
+            logmsg ${LL_INFO} "一時ファイル削除：${file_path}"
+        done
     fi
 }
 

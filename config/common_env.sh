@@ -28,12 +28,24 @@ export COM_SHELL_DIR="${SHELL_DIR}/common"
 
 
 #########################
-# ファイルのパス
+# 共通ファイルのパス
 #########################
 
 # 共通モジュールファイルのパス
 export COMMON_LIB_SH="${COM_SHELL_DIR}/common_function.sh"
-# export DOT_ENV="${ENV_DIR}/.env"
+# 環境設定ファイルのパス
+export APP_ENV="${ENV_DIR}/app.env"
+
+
+#########################
+# 処理別ファイルのパス
+#########################
+
+# 設定ファイル
+export SETTING_CSV="${CONFIG_DIR}/app.csv"
+# 設定ファイル整形用一時ファイル
+export TMP_FORMATED_SETTING_CSV="${TMP_DIR}/tmp_sg01001a.csv"
+
 
 
 #########################
@@ -55,5 +67,5 @@ export DB_SCHEMA="work"
 # 設定するバインド変数を格納
 export DB_BIND=" \
     -v schema=${DB_SCHEMA} \
-    -v CONFIG_DIR=${CONFIG_DIR} \
+    -v tmp_formated_setting_csv=${TMP_FORMATED_SETTING_CSV} \
 "

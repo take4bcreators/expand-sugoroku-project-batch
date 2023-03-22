@@ -1,11 +1,11 @@
 #!/bin/bash
 
 ###########################################
-# 【共通SQL実行処理】
+# 【共有一時ファイル削除処理】
 #   [引数1] 機能グループ名
 #   [引数2] 呼び出し元ファイル名
-#   [引数3] 実行SQLファイル名
-#   [実行例] execute_sql.sh "importconf" "SGTS0001.sh" "sgts0001.sql"
+#   [引数3] 削除対象ファイルのパスが格納されている変数名
+#   [実行例] remove_shared_tmp.sh "importconf" "SGTS0001.sh" "TMP_REMOVE_FILE_CSV"
 ###########################################
 
 
@@ -22,8 +22,8 @@ fi
 module_group_name=$1
 # 呼び出し元シェルスクリプトの名前
 exec_shell_name=$2
-# 実行SQLの名前
-exec_sql_name=$3
+# 削除対象ファイルのパスが格納されている変数名
+remove_target_var_name=$3
 
 # このプロジェクトのトップディレクトリのパス（.bash_profile で定義済み）
 PROJECT_BATCH_ROOT="${PROJECT_BATCH_ROOT}"
@@ -75,41 +75,35 @@ source "${APP_ENV}"
 logmsg ${LL_INFO} "実行開始"
 dumpinfo
 
-# SQLファイルのフルパス
-exec_sql_file_path="${SQL_DIR}/${module_group_name}/${exec_sql_name}"
-# SQLファイル存在チェック
-if [ ! -f ${exec_sql_file_path} ]; then
-    logmsg ${LL_ERR} "ERROR 実行SQLファイルが存在しません"
-    logmsg ${LL_ERR} "指定されたファイル名：${exec_sql_file_path}"
+# 削除対象ファイルを共通変数から取得
+remove_target_file="${!remove_target_var_name}"
+
+# 情報出力・変数状況確認
+logmsg ${LL_INFO} "削除対象ファイル：${remove_target_file}"
+if [ -z "${remove_target_file}" ]; then
+    logmsg ${LL_ERR} "ファイル名の指定が正しくありません"
+    removetmp
+    logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
-# SQL実行
-psql -d "${DB_NAME}" -U "${DB_USER}" -f "${exec_sql_file_path}" --set ON_ERROR_STOP=on ${DB_BIND} > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
-# PSQLからの戻り値
-psql_return_code=$?
-
-# 標準出力をログへ出力
-if [ -s ${STD_OUT_FILE} ]; then
-    logmsg ${LL_INFO} "PSQL標準出力メッセージ...\n""$(cat ${STD_OUT_FILE})"
+# 存在確認をして削除
+if [ -f "${remove_target_file}" ]; then
+    rm "${remove_target_file}"
+    return_code=$?
+    if [ ${return_code} -ne 0 ]; then
+        logmsg ${LL_ERR} "ファイル削除でエラーが発生しました"
+        removetmp
+        logmsg ${LL_ERR} "異常終了"
+        exit 1
+    fi
 else
-    logmsg ${LL_INFO} "PSQL標準出力メッセージ なし"
-fi
-# エラー出力をログとコンソールへ出力
-if [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_INFO} "PSQLエラー出力メッセージ...\n""$(cat ${STD_ERR_FILE})"
-    cat ${STD_ERR_FILE}
+    logmsg ${LL_WARN} "削除対象ファイルはありませんでした"
 fi
 
-# 出力確認用ファイルの削除
+logmsg ${LL_INFO} "ファイルを削除しました"
+echo "ファイルを削除しました：${remove_target_file}"
+
 removetmp
-
-# SQLエラーチェック
-if [ ${psql_return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "PSQLエラー 戻り値：${psql_return_code}"
-    logmsg ${LL_ERR} "異常終了"
-    exit ${psql_return_code}
-fi
-
 logmsg ${LL_INFO} "正常終了"
 exit 0
