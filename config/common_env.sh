@@ -43,8 +43,10 @@ export APP_ENV="${ENV_DIR}/app.env"
 
 # 設定ファイル
 export SETTING_CSV="${CONFIG_DIR}/app.csv"
-# 設定ファイル整形用一時ファイル
+# 設定ファイルデータ整形一時ファイル
 export TMP_FORMATED_SETTING_CSV="${TMP_DIR}/tmp_sg01001a.csv"
+# 駅すぱあとAPIリクエスト一時CSV
+export TMP_EKISPERT_REQUEST_CSV="${TMP_DIR}/tmp_sg02002a.csv"
 
 
 
@@ -68,4 +70,5 @@ export DB_SCHEMA="work"
 export DB_BIND=" \
     -v schema=${DB_SCHEMA} \
     -v tmp_formated_setting_csv=${TMP_FORMATED_SETTING_CSV} \
+    -v tmp_ekispert_request_csv=${TMP_EKISPERT_REQUEST_CSV} \
 "
