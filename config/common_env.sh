@@ -53,12 +53,16 @@ export SEQ_FILES_EXT="???"
 export SETTING_CSV="${CONFIG_DIR}/app.csv"
 # 設定ファイルデータ整形一時ファイル
 export TMP_FORMATED_SETTING_CSV="${TMP_DIR}/tmp_sg01001a.csv"
+# 駅すぱあと設定ファイル
+export EKISPERT_SETTING_CSV="${CONFIG_DIR}/ekispert_conf.csv"
+# 駅すぱあと設定ファイルデータ整形一時ファイル
+export TMP_FORMATED_EKISPERT_SETTING_CSV="${TMP_DIR}/tmp_sg02001a.csv"
 # 駅すぱあとAPIリクエスト一時CSV
-export TMP_EKISPERT_REQUEST_CSV="${TMP_DIR}/tmp_sg02002a.csv"
+export TMP_EKISPERT_REQUEST_CSV="${TMP_DIR}/tmp_sg02005a.csv"
 # 駅すぱあとAPIレスポンス一時JSON
-export TMP_EKISPERT_RESPONSE_JSONS="${TMP_DIR}/tmp_sg02003a.${SEQ_FILES_EXT}.json"
+export TMP_EKISPERT_RESPONSE_JSONS="${TMP_DIR}/tmp_sg02006a.${SEQ_FILES_EXT}.json"
 # 駅すぱあとAPIレスポンス集約一時CSV
-export TMP_EKISPERT_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg02004a.csv"
+export TMP_EKISPERT_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg02007a.csv"
 
 
 
@@ -68,6 +72,7 @@ export TMP_EKISPERT_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg02004a.csv"
 
 # 共有一時ファイルをジョブで削除するかのフラグ（1:削除する／0:削除しない）
 export REMOVE_SHARED_TMP=0
+# export REMOVE_SHARED_TMP=1
 
 
 
@@ -91,5 +96,7 @@ export DB_SCHEMA="work"
 export DB_BIND=" \
     -v schema=${DB_SCHEMA} \
     -v tmp_formated_setting_csv=${TMP_FORMATED_SETTING_CSV} \
+    -v tmp_formated_ekispert_setting_csv=${TMP_FORMATED_EKISPERT_SETTING_CSV} \
     -v tmp_ekispert_request_csv=${TMP_EKISPERT_REQUEST_CSV} \
+    -v tmp_ekispert_response_join_csv=${TMP_EKISPERT_RESPONSE_JOIN_CSV} \
 "

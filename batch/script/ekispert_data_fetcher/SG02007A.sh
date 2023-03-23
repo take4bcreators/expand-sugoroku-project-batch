@@ -3,7 +3,7 @@
 ###################################
 # 駅すぱあとAPIレスポンス集約
 ###################################
-
+# @todo 集約部分を削除処理に合わせて修正する
 
 # このシェルスクリプトが所属する機能グループ名
 # （このシェルの親ディレクトリ名を格納）
@@ -96,10 +96,10 @@ if [ "${file_count}" -gt 0 ]; then
         # jqクエリ分岐、スキップのためにデータ件数を取得して分岐
         response_data_cnt=$(cat "${responsefile}" | jq -r '.ResultSet.max')
         jq_query=""
-        if [ "${response_data_cnt}" -eq 0 ]; then
+        if [ "${response_data_cnt}" = "0" ]; then
             logmsg ${LL_WARN} "レスポンスデータがありません。スキップします"
             continue
-        elif [ "${response_data_cnt}" -eq 1 ]; then
+        elif [ "${response_data_cnt}" = "1" ]; then
             jq_query='.ResultSet.Point.GeoPoint | [.lati_d, .longi_d] | @csv'
         else
             jq_query='.ResultSet.Point[0].GeoPoint | [.lati_d, .longi_d] | @csv'
