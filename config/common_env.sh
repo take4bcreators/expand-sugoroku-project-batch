@@ -38,6 +38,15 @@ export APP_ENV="${ENV_DIR}/app.env"
 
 
 #########################
+# 指定文字列など
+#########################
+
+# 連番ファイルなどの置換前となる文字列
+export SEQ_DUMMY_STR="nnn"
+export SEQ_DUMMY_STR_FOR_SEARCH="???"
+
+
+#########################
 # 処理別ファイルのパス
 #########################
 
@@ -47,6 +56,10 @@ export SETTING_CSV="${CONFIG_DIR}/app.csv"
 export TMP_FORMATED_SETTING_CSV="${TMP_DIR}/tmp_sg01001a.csv"
 # 駅すぱあとAPIリクエスト一時CSV
 export TMP_EKISPERT_REQUEST_CSV="${TMP_DIR}/tmp_sg02002a.csv"
+# 駅すぱあとAPIレスポンス一時JSON
+export TMP_EKISPERT_RESPONSE_JSON="${TMP_DIR}/tmp_sg02003a.${SEQ_DUMMY_STR}.json"
+# 駅すぱあとAPIレスポンス集約一時CSV
+export TMP_EKISPERT_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg02004a.csv"
 
 
 

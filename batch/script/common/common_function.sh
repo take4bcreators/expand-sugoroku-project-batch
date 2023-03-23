@@ -78,17 +78,17 @@ function dumpinfo() {
 function removetmp() {
     if [ -f "${STD_OUT_FILE}" ]; then
         rm "${STD_OUT_FILE}"
-        logmsg ${LL_INFO} "一時ファイル削除：${STD_OUT_FILE}"
+        logmsg ${LL_INFO} "[一時ファイル削除] ${STD_OUT_FILE}"
     fi
     if [ -f "${STD_ERR_FILE}" ]; then
         rm "${STD_ERR_FILE}"
-        logmsg ${LL_INFO} "一時ファイル削除：${STD_ERR_FILE}"
+        logmsg ${LL_INFO} "[一時ファイル削除] ${STD_ERR_FILE}"
     fi
     # 引数が指定された場合はそのファイルを削除
     if [ $# != 0 ]; then
         for file_path; do
             rm "${file_path}"
-            logmsg ${LL_INFO} "一時ファイル削除：${file_path}"
+            logmsg ${LL_INFO} "[一時ファイル削除] ${file_path}"
         done
     fi
 }
