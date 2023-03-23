@@ -83,23 +83,24 @@ fi
 
 # レスポンスデータ集約実行
 logmsg ${LL_INFO} "レスポンスデータ集約実行"
-response_files=$(echo "${TMP_EKISPERT_RESPONSE_JSON}" | sed "s/${SEQ_DUMMY_STR}/${SEQ_DUMMY_STR_FOR_SEARCH}/")
-file_count=$(ls ${response_files} 2> /dev/null | wc -l)
+file_count=$(ls ${TMP_EKISPERT_RESPONSE_JSONS} 2> /dev/null | wc -l)
 if [ "${file_count}" -gt 0 ]; then
     for index in $(seq 1 "${file_count}"); do
         # 対象駅名
         station_name=$(sed -n ${index}p "${TMP_EKISPERT_REQUEST_CSV}" | awk -F ',' '{print $1}')
         # 対象の駅名に対応するレスポンスJSONファイルのパス
-        responsefile=$(ls ${response_files} | sed -n ${index}p)
+        responsefile=$(ls ${TMP_EKISPERT_RESPONSE_JSONS} | sed -n ${index}p)
         logmsg ${LL_INFO} "集約対象：${station_name}"
         
-        # jqクエリ分岐、スキップのためにデータ件数を取得して分岐
+        # jqクエリ分岐とスキップのためにデータ件数を取得して分岐
+        #   レスポンスデータの件数が1件か複数件かで配列の有無が変化し、
+        #   リクエスト時のcode指定の有無でデータ形式が微妙に変わるのでjqのクエリを分ける
         response_data_cnt=$(cat "${responsefile}" | jq -r '.ResultSet.max')
         jq_query=""
         if [ "${response_data_cnt}" = "0" ]; then
             logmsg ${LL_WARN} "レスポンスデータがありません。スキップします"
             continue
-        elif [ "${response_data_cnt}" = "1" ]; then
+        elif [ "${response_data_cnt}" = "1" ] || [ "${response_data_cnt}" = "null" ]; then
             jq_query='.ResultSet.Point.GeoPoint | [.lati_d, .longi_d] | @csv'
         else
             jq_query='.ResultSet.Point[0].GeoPoint | [.lati_d, .longi_d] | @csv'
