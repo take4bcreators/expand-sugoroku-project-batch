@@ -71,24 +71,21 @@ dumpinfo
 
 
 # 既存一時ファイルの削除
-logmsg ${LL_INFO} "既存一時ファイル削除処理"
-removefiles=$(echo "${TMP_EKISPERT_RESPONSE_JSON}" | sed "s/${SEQ_DUMMY_STR}/${SEQ_DUMMY_STR_FOR_SEARCH}/")
-file_count=$(ls ${removefiles} 2> /dev/null | wc -l)
+logmsg ${LL_INFO} "既存レスポンス格納用一時ファイル削除処理"
+file_count=$(ls ${TMP_EKISPERT_RESPONSE_JSONS} 2> /dev/null | wc -l)
 if [ "${file_count}" -ne 0 ]; then
-    for removefile in $(ls ${removefiles}); do
-        if [ -f "${removefile}" ]; then
-            logmsg ${LL_INFO} "既存一時ファイル削除：${removefile}"
-            rm "${removefile}"
-            return_code=$?
-            if [ ${return_code} -ne 0 ]; then
-                logmsg ${LL_ERR} "ファイル削除でエラーが発生しました"
-                removetmp
-                logmsg ${LL_ERR} "異常終了"
-                exit 1
-            fi
-        fi
-    done
-    logmsg ${LL_INFO} "既存一時ファイル削除完了"
+    logmsg ${LL_INFO} "ファイル削除前...\n$(ls ${TMP_EKISPERT_RESPONSE_JSONS} 2> /dev/null)"
+    logmsg ${LL_INFO} "ファイル削除：${TMP_EKISPERT_RESPONSE_JSONS}"
+    rm ${TMP_EKISPERT_RESPONSE_JSONS}
+    return_code=$?
+    logmsg ${LL_INFO} "ファイル削除後...\n$(ls ${TMP_EKISPERT_RESPONSE_JSONS} 2> /dev/null)"
+    if [ ${return_code} -ne 0 ]; then
+        logmsg ${LL_ERR} "ファイル削除でエラーが発生しました"
+        removetmp
+        logmsg ${LL_ERR} "異常終了"
+        exit 1
+    fi
+    logmsg ${LL_INFO} "既存レスポンス格納用一時ファイル削除処理完了"
 else
     logmsg ${LL_INFO} "既存一時ファイルが無いので削除処理をスキップします"
 fi
@@ -120,7 +117,7 @@ for record in $(cat "${TMP_EKISPERT_REQUEST_CSV}" | sed '/^$/d'); do
     
     # 書き出し先一時ファイルの決定
     record_cnt_zero_pad=$(printf '%03d\n' ${record_cnt})
-    outfile=$(echo "${TMP_EKISPERT_RESPONSE_JSON}" | sed "s/${SEQ_DUMMY_STR}/${record_cnt_zero_pad}/")
+    outfile=$(echo "${TMP_EKISPERT_RESPONSE_JSONS}" | sed "s/${SEQ_FILES_EXT}/${record_cnt_zero_pad}/")
     logmsg ${LL_INFO}  "出力ファイル：${outfile}"
     
     # APIリクエスト実行

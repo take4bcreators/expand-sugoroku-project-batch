@@ -33,8 +33,7 @@ source "${PROJECT_BATCH_ROOT}/config/common_env.sh"
 
 # 削除対象のファイルを指定
 # 複数指定する場合は スペース区切り にする
-REMOVE_TARGET_FILE_LIST="${TMP_FORMATED_SETTING_CSV}"
-
+REMOVE_TARGET_FILE_LIST="${TMP_EKISPERT_REQUEST_CSV} ${TMP_EKISPERT_RESPONSE_JSONS} ${TMP_EKISPERT_RESPONSE_JOIN_CSV}"
 
 
 # シェルスクリプト実行
