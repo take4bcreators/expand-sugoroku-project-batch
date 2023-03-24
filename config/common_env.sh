@@ -53,6 +53,7 @@ export SEQ_FILES_EXT="???"
 export SETTING_CSV="${CONFIG_DIR}/app.csv"
 # 設定ファイルデータ整形一時ファイル
 export TMP_FORMATED_SETTING_CSV="${TMP_DIR}/tmp_sg01001a.csv"
+
 # 駅すぱあと設定ファイル
 export EKISPERT_SETTING_CSV="${CONFIG_DIR}/ekispert_conf.csv"
 # 駅すぱあと設定ファイルデータ整形一時ファイル
@@ -64,6 +65,16 @@ export TMP_EKISPERT_RESPONSE_JSONS="${TMP_DIR}/tmp_sg02006a.${SEQ_FILES_EXT}.jso
 # 駅すぱあとAPIレスポンス集約一時CSV
 export TMP_EKISPERT_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg02007a.csv"
 
+# ホットペッパー設定ファイル
+export HOTPEPPER_SETTING_CSV="${CONFIG_DIR}/hotpepper_conf.csv"
+# ホットペッパー設定ファイルデータ整形一時ファイル
+export TMP_FORMATED_HOTPEPPER_SETTING_CSV="${TMP_DIR}/tmp_sg03001a.csv"
+# ホットペッパーAPIリクエスト一時CSV
+export TMP_HOTPEPPER_REQUEST_CSV="${TMP_DIR}/tmp_sg03005a.csv"
+# ホットペッパーAPIレスポンス一時JSON
+export TMP_HOTPEPPER_RESPONSE_JSONS="${TMP_DIR}/tmp_sg03006a.${SEQ_FILES_EXT}.json"
+# ホットペッパーAPIレスポンス集約一時TSV
+export TMP_HOTPEPPER_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg03007a.tsv"
 
 
 #########################
