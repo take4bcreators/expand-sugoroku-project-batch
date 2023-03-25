@@ -16,6 +16,10 @@ private/*
 *.code-workspace
 .history/
 
+# Nodejs
+node_modules
+
+
 # macOS
 .DS_Store
 .AppleDouble
