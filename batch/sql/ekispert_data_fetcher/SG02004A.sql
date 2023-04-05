@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS :schema.sg02004a;
 -- テーブル作成
 CREATE TABLE :schema.sg02004a (
     station_name TEXT,
-    station_code text,
+    station_code TEXT,
     PRIMARY KEY(station_name)
 );
 

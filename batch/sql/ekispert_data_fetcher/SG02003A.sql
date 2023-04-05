@@ -12,9 +12,9 @@ DROP TABLE IF EXISTS :schema.sg02003a;
 CREATE TABLE :schema.sg02003a (
     station_name TEXT,
     store_type TEXT,
-    fetch_api_data boolean,
-    create_board boolean,
-    station_code text,
+    fetch_api_data BOOLEAN,
+    create_board BOOLEAN,
+    station_code TEXT,
     PRIMARY KEY(station_name, store_type)
 );
 

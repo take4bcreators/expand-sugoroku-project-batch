@@ -110,4 +110,5 @@ export DB_BIND=" \
     -v tmp_formated_ekispert_setting_csv=${TMP_FORMATED_EKISPERT_SETTING_CSV} \
     -v tmp_ekispert_request_csv=${TMP_EKISPERT_REQUEST_CSV} \
     -v tmp_ekispert_response_join_csv=${TMP_EKISPERT_RESPONSE_JOIN_CSV} \
+    -v tmp_formated_hotpepper_setting_csv=${TMP_FORMATED_HOTPEPPER_SETTING_CSV} \
 "
