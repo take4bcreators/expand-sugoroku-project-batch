@@ -7,13 +7,20 @@
 # ※対象ファイルは下部で指定
 
 
+# このシェルスクリプトのパス
+# Rundeck からの実行であるか場合は オプション「ORIGINAL_FILE_PATH」で渡されたフルパスにする
+shellscript_path=$0
+if [ ! -z "${RD_OPTION_ORIGINAL_FILE_PATH}" ]; then
+    shellscript_path="${RD_OPTION_ORIGINAL_FILE_PATH}"
+fi
+
 # このシェルスクリプトが所属する機能グループ名
 # （このシェルの親ディレクトリ名を格納）
-module_group_name=$(cd $(dirname $0); basename $(pwd))
+module_group_name=$(cd $(dirname "${shellscript_path}"); basename $(pwd))
 
 # 処理名
 # （このシェルスクリプトの名前を拡張子なしで格納）
-this_process_name=$(basename $0 .sh)
+this_process_name=$(basename "${shellscript_path}" .sh)
 
 # このプロジェクトのトップディレクトリのパス（.bash_profile で定義済み）
 PROJECT_BATCH_ROOT="${PROJECT_BATCH_ROOT}"
