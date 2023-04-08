@@ -74,7 +74,7 @@ export TMP_HOTPEPPER_REQUEST_CSV="${TMP_DIR}/tmp_sg03005a.csv"
 # ホットペッパーAPIレスポンス一時JSON
 export TMP_HOTPEPPER_RESPONSE_JSONS="${TMP_DIR}/tmp_sg03006a.${SEQ_FILES_EXT}.json"
 # ホットペッパーAPIレスポンス集約一時TSV
-export TMP_HOTPEPPER_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg03007a.tsv"
+export TMP_HOTPEPPER_RESPONSE_JOIN_TSV="${TMP_DIR}/tmp_sg03007a.tsv"
 
 
 #########################
@@ -82,8 +82,8 @@ export TMP_HOTPEPPER_RESPONSE_JOIN_CSV="${TMP_DIR}/tmp_sg03007a.tsv"
 #########################
 
 # 共有一時ファイルをジョブで削除するかのフラグ（1:削除する／0:削除しない）
-export REMOVE_SHARED_TMP=0
-# export REMOVE_SHARED_TMP=1
+# export REMOVE_SHARED_TMP=0
+export REMOVE_SHARED_TMP=1
 
 
 
@@ -111,4 +111,7 @@ export DB_BIND=" \
     -v tmp_ekispert_request_csv=${TMP_EKISPERT_REQUEST_CSV} \
     -v tmp_ekispert_response_join_csv=${TMP_EKISPERT_RESPONSE_JOIN_CSV} \
     -v tmp_formated_hotpepper_setting_csv=${TMP_FORMATED_HOTPEPPER_SETTING_CSV} \
+    -v tmp_hotpepper_request_csv=${TMP_HOTPEPPER_REQUEST_CSV} \
+    -v tmp_hotpepper_response_join_tsv=${TMP_HOTPEPPER_RESPONSE_JOIN_TSV} \
+    
 "
