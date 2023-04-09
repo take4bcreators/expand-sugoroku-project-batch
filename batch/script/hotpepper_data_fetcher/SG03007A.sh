@@ -77,13 +77,13 @@ logmsg ${LL_INFO} "実行開始"
 dumpinfo
 
 
-# レスポンス集約用CSVファイルの初期化
-: > "${TMP_HOTPEPPER_RESPONSE_JOIN_CSV}"
+# レスポンス集約用TSVファイルの初期化
+: > "${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
 return_code=$?
 if [ ${return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "レスポンス集約用CSVの初期化でエラーが発生しました"
+    logmsg ${LL_ERR} "レスポンス集約用TSVの初期化でエラーが発生しました"
     logmsg ${LL_ERR} "「:」コマンドリダイレクト戻り値：${status}"
-    logmsg ${LL_ERR} "CSVファイルパス：${TMP_HOTPEPPER_RESPONSE_JOIN_CSV}"
+    logmsg ${LL_ERR} "TSVファイルパス：${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
     exit 1
 fi
 
@@ -128,7 +128,7 @@ if [ "${file_count}" -gt 0 ]; then
                 | jq -r "${jq_query}"                                                                                                   2>> "${STD_ERR_FILE}" \
                 | sed 's/"//g'                                                                                                          2>> "${STD_ERR_FILE}" \
                 | awk -v stationname="${station_name}" -v storetype="${store_type}" 'BEGIN{OFS="\t"}{print stationname, storetype, $0}' 2>> "${STD_ERR_FILE}" \
-                >> "${TMP_HOTPEPPER_RESPONSE_JOIN_CSV}"
+                >> "${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
             return_codes=(${PIPESTATUS[@]})
             total_return_code=$(echo "${return_codes[@]}" | awk '{for(i=1;i<=NF;i++){sum+=$i}}END{print sum}')
             

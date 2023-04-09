@@ -22,8 +22,8 @@ CREATE TABLE :schema.:to_table_name (
     PRIMARY KEY(station_name)
 );
 
--- 読込コマンド組立・実行 (カンマ区切り・列指定あり・ヘッダーあり)
-\set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_csv_path'\' WITH CSV Header'
+-- 読込コマンド組立・実行 (カンマ区切り・列指定あり・ヘッダーなし)
+\set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_csv_path'\' WITH CSV'
 :importcmd
 
 -- トランザクション確定
