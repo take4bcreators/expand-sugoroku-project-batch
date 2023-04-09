@@ -28,9 +28,9 @@ CREATE TABLE :schema.:to_table_name (
 );
 
 -- 読込コマンド組立・実行 (TSV・列指定あり・ヘッダーなし)
-\set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_tsv_path'\'
---\set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_tsv_path'\' WITH NULL AS '' '
-
+-- \set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_tsv_path'\''
+-- \set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_tsv_path'\' WITH NULL AS '' '
+\set importcmd '\\COPY ':schema'.':to_table_name'(':column_list') FROM \'':from_tsv_path'\''
 :importcmd
 
 -- トランザクション確定

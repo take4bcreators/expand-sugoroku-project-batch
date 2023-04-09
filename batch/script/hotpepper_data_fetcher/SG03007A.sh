@@ -78,7 +78,7 @@ dumpinfo
 
 
 # レスポンス集約用CSVファイルの初期化
-: > "${TMP_HOTPEPPER_RESPONSE_JOIN_CSV}"
+: > "${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
 return_code=$?
 if [ ${return_code} -ne 0 ]; then
     logmsg ${LL_ERR} "レスポンス集約用CSVの初期化でエラーが発生しました"
