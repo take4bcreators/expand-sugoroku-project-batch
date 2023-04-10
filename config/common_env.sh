@@ -19,6 +19,8 @@ export ENV_DIR="${PROJECT_BATCH_ROOT}/env"
 export LOG_DIR="${PROJECT_BATCH_ROOT}/log"
 # 一時ファイル用ディレクトリのパス
 export TMP_DIR="${PROJECT_BATCH_ROOT}/tmp"
+# 共有ファイル用ディレクトリのパス
+export SHARED_DIR="${PROJECT_BATCH_ROOT}/shared"
 # バッチ用シェルスクリプトのあるディレクトリのパス
 export SHELL_DIR="${BATCH_DIR}/script"
 # SQLファイルのあるディレクトリのパス
@@ -76,6 +78,20 @@ export TMP_HOTPEPPER_RESPONSE_JSONS="${TMP_DIR}/tmp_sg03006a.${SEQ_FILES_EXT}.js
 # ホットペッパーAPIレスポンス集約一時TSV
 export TMP_HOTPEPPER_RESPONSE_JOIN_TSV="${TMP_DIR}/tmp_sg03007a.tsv"
 
+# ボードイベント定義ファイル
+export BOARD_EVENT_CSV="${DATA_DIR}/board_event.csv"
+# ボードイベント定義ファイルデータ整形一時ファイル
+export TMP_FORMATED_BOARD_EVENT_CSV="${TMP_DIR}/tmp_sg04001a.csv"
+# ミニゲーム情報ファイル
+export MINIGAME_DATA_CSV="${DATA_DIR}/minigame_data.csv"
+# ミニゲーム情報ファイルデータ整形一時ファイル
+export TMP_FORMATED_MINIGAME_DATA_CSV="${TMP_DIR}/tmp_sg04003a.csv"
+# ボードベース定義ファイル
+export BOARD_BASE_CSV="${DATA_DIR}/board_base.csv"
+# ボードベース定義ファイルデータ整形一時ファイル
+export TMP_FORMATED_BOARD_BASE_CSV="${TMP_DIR}/tmp_sg04011a.csv"
+# ボードデータJSON
+export BOARD_DATA_JSON="${SHARED_DIR}/boards.json"
 
 #########################
 # 走行設定
@@ -113,5 +129,8 @@ export DB_BIND=" \
     -v tmp_formated_hotpepper_setting_csv=${TMP_FORMATED_HOTPEPPER_SETTING_CSV} \
     -v tmp_hotpepper_request_csv=${TMP_HOTPEPPER_REQUEST_CSV} \
     -v tmp_hotpepper_response_join_tsv=${TMP_HOTPEPPER_RESPONSE_JOIN_TSV} \
-    
+    -v tmp_formated_board_event_csv=${TMP_FORMATED_BOARD_EVENT_CSV} \
+    -v tmp_formated_minigame_data_csv=${TMP_FORMATED_MINIGAME_DATA_CSV} \
+    -v tmp_formated_board_base_csv=${TMP_FORMATED_BOARD_BASE_CSV} \
+    -v board_data_json=${BOARD_DATA_JSON} \
 "
