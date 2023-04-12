@@ -98,8 +98,8 @@ export BOARD_DATA_JSON="${SHARED_DIR}/boards.json"
 #########################
 
 # 共有一時ファイルをジョブで削除するかのフラグ（1:削除する／0:削除しない）
-# export REMOVE_SHARED_TMP=0
-export REMOVE_SHARED_TMP=1
+export REMOVE_SHARED_TMP=0
+# export REMOVE_SHARED_TMP=1
 
 
 
