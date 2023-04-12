@@ -37,6 +37,8 @@ SELECT DISTINCT
     station_lon
 FROM
     :schema.sg03003a
+WHERE
+    fetch_api_data = 't'
 ;
 
 
