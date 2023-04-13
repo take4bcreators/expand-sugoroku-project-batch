@@ -9,14 +9,17 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04013a;
 
 -- テーブル作成
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04013a (
     board_id TEXT,
     square_number INTEGER,
     station_name TEXT,
     store_type TEXT,
     store_name TEXT,
+    store_name_kana TEXT,
     store_id TEXT,
+    store_catch TEXT,
+    store_genre_catch TEXT,
     store_access TEXT,
     store_address TEXT,
     store_open TEXT,
@@ -34,14 +37,17 @@ CREATE TABLE :schema.sg04013a (
 );
 
 -- sg04010a に sg04012a のボードベース情報を付与する
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04013a (
     board_id,
     square_number,
     station_name,
     store_type,
     store_name,
+    store_name_kana,
     store_id,
+    store_catch,
+    store_genre_catch,
     store_access,
     store_address,
     store_open,
@@ -62,7 +68,10 @@ SELECT
     t1.station_name,
     t1.store_type,
     t1.store_name,
+    t1.store_name_kana,
     t1.store_id,
+    t1.store_catch,
+    t1.store_genre_catch,
     t1.store_access,
     t1.store_address,
     t1.store_open,

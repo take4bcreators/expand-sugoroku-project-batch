@@ -9,14 +9,17 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04010a;
 
 -- テーブル作成
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04010a (
     board_id TEXT,
     square_number INTEGER,
     station_name TEXT,
     store_type TEXT,
     store_name TEXT,
+    store_name_kana TEXT,
     store_id TEXT,
+    store_catch TEXT,
+    store_genre_catch TEXT,
     store_access TEXT,
     store_address TEXT,
     store_open TEXT,
@@ -56,7 +59,7 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
-        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+        -- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             INSERT INTO ' || p_schema || '.' || C_INSERT_TABLE_NAME ||' (
                 board_id,
@@ -64,7 +67,10 @@ BEGIN
                 station_name,
                 store_type,
                 store_name,
+                store_name_kana,
                 store_id,
+                store_catch,
+                store_genre_catch,
                 store_access,
                 store_address,
                 store_open,
@@ -84,7 +90,10 @@ BEGIN
                 station_name,
                 store_type,
                 store_name,
+                store_name_kana,
                 store_id,
+                store_catch,
+                store_genre_catch,
                 store_access,
                 store_address,
                 store_open,

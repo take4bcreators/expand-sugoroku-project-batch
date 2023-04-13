@@ -15,7 +15,7 @@ DROP TYPE IF EXISTS ty_square_minigame_json;
 
 
 -- 独自型（JSON組立時に使用する）の作成
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 -- (boards.json)[].board
 CREATE TYPE ty_board_json AS (
     id TEXT,
@@ -35,7 +35,10 @@ CREATE TYPE ty_square_json AS (
 -- (boards.json)[].square[].store
 CREATE TYPE ty_square_store_json AS (
     name TEXT,
+    name_kana TEXT,
     id TEXT,
+    catch TEXT,
+    genre_catch TEXT,
     access TEXT,
     address TEXT,
     open TEXT,
@@ -72,7 +75,7 @@ CREATE TABLE :schema.sg04016a (
 
 
 -- データ挿入
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04016a (
     boards_data
 )
@@ -89,7 +92,10 @@ WITH json_build_01 AS (
     -- (boards.json)[].square[].store 配下
         ROW_TO_JSON(ROW(
             store_name,
+            store_name_kana,
             store_id,
+            store_catch,
+            store_genre_catch,
             store_access,
             store_address,
             store_open,

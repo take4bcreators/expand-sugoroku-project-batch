@@ -122,7 +122,10 @@ if [ "${file_count}" -gt 0 ]; then
             # @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
             jq_query=".results.shop[${data_index}] | [
                 .name,
+                .name_kana,
                 .id,
+                .catch,
+                .genre.catch,
                 .access,
                 .address,
                 .open,

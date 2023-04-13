@@ -9,15 +9,18 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04015a;
 
 -- テーブル作成
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04015a (
     board_id TEXT,
     board_name TEXT NOT NULL,
     board_base TEXT NOT NULL,
     square_id INTEGER,
-    square_goalflag BOOLEAN,
+    square_goalflag BOOLEAN NOT NULL,
     store_name TEXT NOT NULL,
+    store_name_kana TEXT NOT NULL,
     store_id TEXT NOT NULL,
+    store_catch TEXT NOT NULL,
+    store_genre_catch TEXT NOT NULL,
     store_access TEXT NOT NULL,
     store_address TEXT NOT NULL,
     store_open TEXT NOT NULL,
@@ -36,7 +39,7 @@ CREATE TABLE :schema.sg04015a (
 );
 
 -- sg04013a のデータを整える
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04015a (
     board_id,
     board_name,
@@ -44,7 +47,10 @@ INSERT INTO :schema.sg04015a (
     square_id,
     square_goalflag,
     store_name,
+    store_name_kana,
     store_id,
+    store_catch,
+    store_genre_catch,
     store_access,
     store_address,
     store_open,
@@ -70,7 +76,10 @@ SELECT
             THEN TRUE
         ELSE FALSE END              AS square_goalflag,
     COALESCE(store_name, '')        AS store_name,
+    COALESCE(store_name_kana, '')   AS store_name_kana,
     COALESCE(store_id, '')          AS store_id,
+    COALESCE(store_catch, '')       AS store_catch,
+    COALESCE(store_genre_catch, '') AS store_genre_catch,
     COALESCE(store_access, '')      AS store_access,
     COALESCE(store_address, '')     AS store_address,
     COALESCE(store_open, '')        AS store_open,

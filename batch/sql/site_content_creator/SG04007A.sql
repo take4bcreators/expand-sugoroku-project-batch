@@ -9,7 +9,7 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04007a;
 
 -- テーブル作成
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04007a (
     board_id TEXT,
     station_name TEXT,
@@ -17,7 +17,10 @@ CREATE TABLE :schema.sg04007a (
     fetch_api_data BOOLEAN,
     create_board BOOLEAN,
     store_name TEXT,
+    store_name_kana TEXT,
     store_id TEXT,
+    store_catch TEXT,
+    store_genre_catch TEXT,
     store_access TEXT,
     store_address TEXT,
     store_open TEXT,
@@ -26,7 +29,7 @@ CREATE TABLE :schema.sg04007a (
 );
 
 -- sg04006a に 駅名・店タイプ 毎に ボードID を付与する
--- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+-- @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04007a (
     board_id,
     station_name,
@@ -34,7 +37,10 @@ INSERT INTO :schema.sg04007a (
     fetch_api_data,
     create_board,
     store_name,
+    store_name_kana,
     store_id,
+    store_catch,
+    store_genre_catch,
     store_access,
     store_address,
     store_open,
@@ -50,7 +56,10 @@ SELECT DISTINCT
     fetch_api_data,
     create_board,
     store_name,
+    store_name_kana,
     store_id,
+    store_catch,
+    store_genre_catch,
     store_access,
     store_address,
     store_open,
