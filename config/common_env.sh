@@ -90,6 +90,8 @@ export TMP_FORMATED_MINIGAME_DATA_CSV="${TMP_DIR}/tmp_sg04003a.csv"
 export BOARD_BASE_CSV="${DATA_DIR}/board_base.csv"
 # ボードベース定義ファイルデータ整形一時ファイル
 export TMP_FORMATED_BOARD_BASE_CSV="${TMP_DIR}/tmp_sg04011a.csv"
+# コンテンツデータ一時JSON
+export TMP_CONTENT_DATA_JSON="${TMP_DIR}/tmp_sg04017a.json"
 # ボードデータJSON
 export BOARD_DATA_JSON="${SHARED_DIR}/boards.json"
 
@@ -132,5 +134,5 @@ export DB_BIND=" \
     -v tmp_formated_board_event_csv=${TMP_FORMATED_BOARD_EVENT_CSV} \
     -v tmp_formated_minigame_data_csv=${TMP_FORMATED_MINIGAME_DATA_CSV} \
     -v tmp_formated_board_base_csv=${TMP_FORMATED_BOARD_BASE_CSV} \
-    -v board_data_json=${BOARD_DATA_JSON} \
+    -v tmp_content_data_json=${TMP_CONTENT_DATA_JSON} \
 "

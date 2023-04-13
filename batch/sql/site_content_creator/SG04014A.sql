@@ -1,5 +1,5 @@
 -- --------------------------------------------
--- コンテンツデータ整形
+-- スタートゴール情報付与
 -- --------------------------------------------
 
 -- トランザクション開始
@@ -9,33 +9,37 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04014a;
 
 -- テーブル作成
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04014a (
     board_id TEXT,
-    board_name TEXT NOT NULL,
-    board_base TEXT NOT NULL,
-    store_name TEXT NOT NULL,
-    store_id TEXT NOT NULL,
-    store_access TEXT NOT NULL,
-    store_address TEXT NOT NULL,
-    store_open TEXT NOT NULL,
-    store_photo TEXT NOT NULL,
-    event_name TEXT NOT NULL,
-    event_detail TEXT NOT NULL,
-    point INTEGER NOT NULL,
-    skip INTEGER NOT NULL,
-    move INTEGER NOT NULL,
-    minigame_id TEXT NOT NULL,
-    minigame_name TEXT NOT NULL,
-    minigame_detail TEXT NOT NULL,
     square_number INTEGER,
+    station_name TEXT,
+    store_type TEXT,
+    store_name TEXT,
+    store_id TEXT,
+    store_access TEXT,
+    store_address TEXT,
+    store_open TEXT,
+    store_photo TEXT,
+    event_name TEXT,
+    event_detail TEXT,
+    event_point INTEGER,
+    event_skip INTEGER,
+    event_move INTEGER,
+    minigame_id TEXT,
+    minigame_name TEXT,
+    minigame_detail TEXT,
+    board_base TEXT,
     PRIMARY KEY(board_id, square_number)
 );
 
--- sg04013a のデータを整える
+-- sg04013a のデータをそのまま sg04014a に挿入する
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04014a (
     board_id,
-    board_name,
-    board_base,
+    square_number,
+    station_name,
+    store_type,
     store_name,
     store_id,
     store_access,
@@ -44,33 +48,74 @@ INSERT INTO :schema.sg04014a (
     store_photo,
     event_name,
     event_detail,
-    point,
-    skip,
-    move,
+    event_point,
+    event_skip,
+    event_move,
     minigame_id,
     minigame_name,
     minigame_detail,
-    square_number
+    board_base
 )
 SELECT
     board_id,
-    station_name || store_type AS board_name,
-    board_base,
-    COALESCE(store_name, ''),
-    COALESCE(store_id, ''),
-    COALESCE(store_access, ''),
-    COALESCE(store_address, ''),
-    COALESCE(store_open, ''),
-    COALESCE(store_photo, ''),
-    COALESCE(event_name, ''),
-    COALESCE(event_detail, ''),
-    COALESCE(point, 0),
-    COALESCE(skip, 0),
-    COALESCE(move, 0),
-    COALESCE(minigame_id, ''),
-    COALESCE(minigame_name, ''),
-    COALESCE(minigame_detail, ''),
-    square_number
+    square_number,
+    station_name,
+    store_type,
+    store_name,
+    store_id,
+    store_access,
+    store_address,
+    store_open,
+    store_photo,
+    event_name,
+    event_detail,
+    event_point,
+    event_skip,
+    event_move,
+    minigame_id,
+    minigame_name,
+    minigame_detail,
+    board_base
+FROM
+    :schema.sg04013a
+;
+
+-- スタートの情報を挿入する
+INSERT INTO :schema.sg04014a (
+    board_id,
+    square_number,
+    station_name,
+    store_type,
+    store_name,
+    board_base
+)
+SELECT DISTINCT
+    board_id,
+    0 AS square_number,
+    station_name,
+    store_type,
+    'スタート' AS store_name,
+    board_base
+FROM
+    :schema.sg04013a
+;
+
+-- ゴールの情報を挿入する
+INSERT INTO :schema.sg04014a (
+    board_id,
+    square_number,
+    station_name,
+    store_type,
+    store_name,
+    board_base
+)
+SELECT DISTINCT
+    board_id,
+    (MAX(square_number) OVER(PARTITION BY board_id)) + 1 AS square_number,
+    station_name,
+    store_type,
+    'ゴール' AS store_name,
+    board_base
 FROM
     :schema.sg04013a
 ;

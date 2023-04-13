@@ -58,12 +58,13 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
+        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             CREATE TABLE ' || p_schema || '.' || C_CREATE_TABLE_BASE_NAME || '_' || v_board_id_record.board_id || ' (
                 board_id TEXT,
                 square_number INTEGER,
-                level TEXT,
-                level_square_number INTEGER,
+                square_level TEXT,
+                square_level_number INTEGER,
                 station_name TEXT,
                 store_type TEXT,
                 store_name TEXT,
@@ -74,14 +75,14 @@ BEGIN
                 store_photo TEXT,
                 event_name TEXT,
                 event_detail TEXT,
-                point INTEGER,
-                skip INTEGER,
-                move INTEGER,
+                event_point INTEGER,
+                event_skip INTEGER,
+                event_move INTEGER,
                 minigame_id TEXT,
                 minigame_name TEXT,
                 minigame_detail TEXT,
-                level_event_number INTEGER,
-                level_event_count INTEGER,
+                event_level_number INTEGER,
+                event_level_count INTEGER,
                 PRIMARY KEY(board_id, square_number)
             )'
         ;
@@ -119,12 +120,13 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
+        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             INSERT INTO ' || p_schema || '.' || C_INSERT_TABLE_BASE_NAME || '_' || v_board_id_record.board_id ||' (
                 board_id,
                 square_number,
-                level,
-                level_square_number,
+                square_level,
+                square_level_number,
                 station_name,
                 store_type,
                 store_name,
@@ -135,21 +137,21 @@ BEGIN
                 store_photo,
                 event_name,
                 event_detail,
-                point,
-                skip,
-                move,
+                event_point,
+                event_skip,
+                event_move,
                 minigame_id,
                 minigame_name,
                 minigame_detail,
-                level_event_number,
-                level_event_count
+                event_level_number,
+                event_level_count
             )
             WITH sg04008a_tmp01 AS (
                 -- sg04008a 側にレベルを付与
                 SELECT
                     board_id,
                     square_number,
-                    TO_CHAR(NTILE(3) OVER(ORDER BY square_number) - 1, ' || QUOTE_LITERAL('FM999') || ') AS level,
+                    TO_CHAR(NTILE(3) OVER(ORDER BY square_number) - 1, ' || QUOTE_LITERAL('FM999') || ') AS square_level,
                     station_name,
                     store_type,
                     store_name,
@@ -166,11 +168,11 @@ BEGIN
                 SELECT
                     board_id,
                     square_number,
-                    level,
+                    square_level,
                     ROW_NUMBER() OVER(
-                        PARTITION BY level
+                        PARTITION BY square_level
                         ORDER BY square_number
-                    ) AS level_square_number,
+                    ) AS square_level_number,
                     station_name,
                     store_type,
                     store_name,
@@ -187,28 +189,28 @@ BEGIN
                 SELECT
                     event_name,
                     event_detail,
-                    point,
-                    skip,
-                    move,
+                    event_point,
+                    event_skip,
+                    event_move,
                     minigame_id,
-                    level,
+                    event_level,
                     minigame_name,
                     minigame_detail,
                     ROW_NUMBER() OVER(
-                        PARTITION BY level
+                        PARTITION BY event_level
                         ORDER BY RANDOM()
-                    ) AS level_event_number,
+                    ) AS event_level_number,
                     COUNT(*) OVER(
-                        PARTITION BY level
-                    ) AS level_event_count
+                        PARTITION BY event_level
+                    ) AS event_level_count
                 FROM
                     ' || p_schema || '.' || C_FROM_RIGHT_TABLE_NAME || '
             )
             SELECT
                 t1.board_id,
                 t1.square_number,
-                t1.level,
-                t1.level_square_number,
+                t1.square_level,
+                t1.square_level_number,
                 t1.station_name,
                 t1.store_type,
                 t1.store_name,
@@ -219,21 +221,21 @@ BEGIN
                 t1.store_photo,
                 t2.event_name,
                 t2.event_detail,
-                t2.point,
-                t2.skip,
-                t2.move,
+                t2.event_point,
+                t2.event_skip,
+                t2.event_move,
                 t2.minigame_id,
                 t2.minigame_name,
                 t2.minigame_detail,
-                t2.level_event_number,
-                t2.level_event_count
+                t2.event_level_number,
+                t2.event_level_count
             FROM
                 sg04008a_tmp02 t1
             LEFT OUTER JOIN
                 sg04005a_tmp01 t2
             ON
-                t1.level = t2.level
-                AND (MOD(t1.level_square_number, t2.level_event_count) + 1) = t2.level_event_number
+                t1.square_level = t2.event_level
+                AND (MOD(t1.square_level_number, t2.event_level_count) + 1) = t2.event_level_number
             ORDER BY
                 square_number
         ';

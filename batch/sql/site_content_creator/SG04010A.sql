@@ -9,6 +9,7 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04010a;
 
 -- テーブル作成
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04010a (
     board_id TEXT,
     square_number INTEGER,
@@ -22,9 +23,9 @@ CREATE TABLE :schema.sg04010a (
     store_photo TEXT,
     event_name TEXT,
     event_detail TEXT,
-    point INTEGER,
-    skip INTEGER,
-    move INTEGER,
+    event_point INTEGER,
+    event_skip INTEGER,
+    event_move INTEGER,
     minigame_id TEXT,
     minigame_name TEXT,
     minigame_detail TEXT,
@@ -55,6 +56,7 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
+        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             INSERT INTO ' || p_schema || '.' || C_INSERT_TABLE_NAME ||' (
                 board_id,
@@ -69,9 +71,9 @@ BEGIN
                 store_photo,
                 event_name,
                 event_detail,
-                point,
-                skip,
-                move,
+                event_point,
+                event_skip,
+                event_move,
                 minigame_id,
                 minigame_name,
                 minigame_detail
@@ -89,9 +91,9 @@ BEGIN
                 store_photo,
                 event_name,
                 event_detail,
-                point,
-                skip,
-                move,
+                event_point,
+                event_skip,
+                event_move,
                 minigame_id,
                 minigame_name,
                 minigame_detail
