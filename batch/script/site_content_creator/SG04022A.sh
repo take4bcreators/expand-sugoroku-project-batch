@@ -1,8 +1,10 @@
 #!/bin/bash
 
 ###################################
-# SQL実行シェル
+# 共有一時ファイル削除
 ###################################
+
+# ※対象ファイルは下部で指定
 
 
 # このシェルスクリプトのパス
@@ -34,8 +36,21 @@ fi
 # shellcheck source=../../../config/common_env.sh
 source "${PROJECT_BATCH_ROOT}/config/common_env.sh"
 
+
+
+# 削除対象のファイルを指定
+# 複数指定する場合は スペース区切り (改行区切りも可) にする
+REMOVE_TARGET_FILE_LIST="
+    ${TMP_FORMATED_BOARD_EVENT_CSV}
+    ${TMP_FORMATED_MINIGAME_DATA_CSV}
+    ${TMP_FORMATED_BOARD_BASE_CSV}
+    ${TMP_CONTENT_DATA_JSON}
+    ${TMP_MINIGAME_DATA_JSON}
+"
+
+
 # シェルスクリプト実行
-#  execute_sql.sh  機能グループ名 このシェルのファイル名 実行するSQLファイル名
-"${COM_SHELL_DIR}"/execute_sql.sh "${module_group_name}" "${this_process_name}.sh" "${this_process_name}.sql"
+#  remove_shared_tmp.sh  機能グループ名 このシェルのファイル名 削除対象ファイルのパスが格納されている変数名
+"${COM_SHELL_DIR}"/remove_shared_tmp.sh "${module_group_name}" "${this_process_name}.sh" "${REMOVE_TARGET_FILE_LIST}"
 
 exit $?

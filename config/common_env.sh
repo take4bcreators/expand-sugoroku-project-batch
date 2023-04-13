@@ -94,6 +94,10 @@ export TMP_FORMATED_BOARD_BASE_CSV="${TMP_DIR}/tmp_sg04011a.csv"
 export TMP_CONTENT_DATA_JSON="${TMP_DIR}/tmp_sg04017a.json"
 # ボードデータJSON
 export BOARD_DATA_JSON="${SHARED_DIR}/boards.json"
+# ミニゲームデータ一時JSON
+export TMP_MINIGAME_DATA_JSON="${TMP_DIR}/tmp_sg04019a.json"
+# ミニゲームJSON
+export MINIGAMES_JSON="${SHARED_DIR}/minigames.json"
 
 #########################
 # 走行設定
@@ -135,4 +139,5 @@ export DB_BIND=" \
     -v tmp_formated_minigame_data_csv=${TMP_FORMATED_MINIGAME_DATA_CSV} \
     -v tmp_formated_board_base_csv=${TMP_FORMATED_BOARD_BASE_CSV} \
     -v tmp_content_data_json=${TMP_CONTENT_DATA_JSON} \
+    -v tmp_minigame_data_json=${TMP_MINIGAME_DATA_JSON} \
 "
