@@ -9,6 +9,7 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.sg04007a;
 
 -- テーブル作成
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.sg04007a (
     board_id TEXT,
     station_name TEXT,
@@ -25,6 +26,7 @@ CREATE TABLE :schema.sg04007a (
 );
 
 -- sg04006a に 駅名・店タイプ 毎に ボードID を付与する
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 INSERT INTO :schema.sg04007a (
     board_id,
     station_name,

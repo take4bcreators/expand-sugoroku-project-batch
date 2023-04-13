@@ -58,6 +58,7 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
+        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             CREATE TABLE ' || p_schema || '.' || C_CREATE_TABLE_BASE_NAME || '_' || v_board_id_record.board_id ||' (
                 board_id TEXT,
@@ -106,6 +107,7 @@ BEGIN
     ';
     
     FOR v_board_id_record IN EXECUTE v_get_board_id_query LOOP
+        -- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
         EXECUTE '
             INSERT INTO ' || p_schema || '.' || C_INSERT_TABLE_BASE_NAME || '_' || v_board_id_record.board_id ||' (
                 board_id,

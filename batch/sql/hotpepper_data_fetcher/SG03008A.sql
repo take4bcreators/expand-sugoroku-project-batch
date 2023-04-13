@@ -3,6 +3,7 @@
 -- ------------------------------------------
 
 -- 処理対象指定
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 \set from_tsv_path  :tmp_hotpepper_response_join_tsv
 \set to_table_name  'sg03008a'
 \set column_list    'station_name, store_type, store_name, store_id, store_access, store_address, store_open, store_photo'
@@ -15,6 +16,7 @@ BEGIN;
 DROP TABLE IF EXISTS :schema.:to_table_name;
 
 -- テーブル作成
+-- 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
 CREATE TABLE :schema.:to_table_name (
     station_name TEXT,
     store_type TEXT,

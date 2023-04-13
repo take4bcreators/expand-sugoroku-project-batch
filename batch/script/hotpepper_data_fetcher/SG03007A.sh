@@ -119,8 +119,15 @@ if [ "${file_count}" -gt 0 ]; then
         let response_data_cnt--
         for data_index in $(seq 0 "${response_data_cnt}"); do
             # 実行クエリ作成
-            # @note 取得項目に変更がある場合は、ここの指定を変更する
-            jq_query=".results.shop[${data_index}] | [.name, .id, .access, .address, .open, .photo.pc.l] | @tsv"
+            # @note 【JSON取得項目定義箇所】 取得項目に変更がある場合は、ここの指定を変更する
+            jq_query=".results.shop[${data_index}] | [
+                .name,
+                .id,
+                .access,
+                .address,
+                .open,
+                .photo.pc.l
+            ] | @tsv"
             
             # 集約実行
             : > "${STD_ERR_FILE}"
