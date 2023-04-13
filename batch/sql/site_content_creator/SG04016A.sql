@@ -164,15 +164,15 @@ WITH json_build_01 AS (
             board_id,
             board_name,
             board_base
-        )::ty_board_json)::JSONB AS board_json,
+        )::ty_board_json)::JSONB AS board,
     -- (boards.json)[].square[] 配下
-        square_jsons
+        square_jsons             AS square
     FROM
         json_build_03
 )
 -- 4. 全体 の JSON配列化
 SELECT
-    JSONB_AGG(json_build_04 ORDER BY (board_json->>'board_id')) AS boards_data
+    JSONB_AGG(json_build_04 ORDER BY (board->>'board_id')) AS boards_data
 FROM
     json_build_04
 ;
