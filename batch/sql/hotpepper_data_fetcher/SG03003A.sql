@@ -20,7 +20,7 @@ CREATE TABLE :schema.sg03003a (
 );
 
 -- sg01002a,sg02008aのデータを結合して、sg03003aテーブルに入れる
-INSERT INTO work.sg03003a (
+INSERT INTO :schema.sg03003a (
     station_name,
     store_type,
     fetch_api_data,
@@ -36,9 +36,9 @@ SELECT
     t2.station_lat,
     t2.station_lon
 FROM
-    work.sg01002a t1
+    :schema.sg01002a t1
 LEFT OUTER JOIN
-    work.sg02008a t2
+    :schema.sg02008a t2
 ON
     t1.station_name = t2.station_name
 ;
