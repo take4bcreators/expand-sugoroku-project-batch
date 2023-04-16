@@ -25,6 +25,8 @@ SELECT DISTINCT
     station_code
 FROM
     :schema.sg02003a
+WHERE
+    fetch_api_data = 't'
 ;
 
 -- トランザクション確定

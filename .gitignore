@@ -2,6 +2,7 @@
 env/*
 tmp/*
 private/*
+shared/*
 *.log
 *.tmp
 *.env
