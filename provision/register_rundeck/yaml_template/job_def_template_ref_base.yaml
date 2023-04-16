@@ -1,0 +1,18 @@
+- defaultTab: nodes
+  description: |
+    <JOB_DESC>
+  executionEnabled: true
+  group: <JOB_DIR>
+  id: <UUID>
+  loglevel: INFO
+  name: <JOB_NAME>
+  nodeFilterEditable: false
+  plugins:
+    ExecutionLifecycle: null
+  scheduleEnabled: true
+  sequence:
+    commands:
+    <JOB_REF>
+    keepgoing: false
+    strategy: node-first
+  uuid: <UUID>

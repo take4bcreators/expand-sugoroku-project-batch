@@ -1,0 +1,2 @@
+JOB_NAME,JOB_DIR,JOB_DESC,REF_JOB_DIR
+SG00000A,batch/main/,すごろくプロジェクト全ジョブ実行,batch/group/
