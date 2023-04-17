@@ -3,6 +3,7 @@ env/*
 tmp/*
 private/*
 shared/*
+provision/register_rundeck/tmp/*
 *.log
 *.tmp
 *.env

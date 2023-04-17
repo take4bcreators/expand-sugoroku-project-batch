@@ -1,0 +1,4 @@
+JOB_NAME,JOB_DIR,JOB_DESC,REF_JOB_DIR
+SG01000A,batch/group/,設定ファイル読み込み,batch/unit/setting_data_loader/
+SG02000A,batch/group/,駅すぱあとAPIリクエスト作成・実行,batch/unit/ekispert_data_fetcher/
+SG03000A,batch/group/,ホットペッパーAPIリクエスト作成・実行,batch/unit/hotpepper_data_fetcher/

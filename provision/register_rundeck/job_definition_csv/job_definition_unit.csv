@@ -1,0 +1,13 @@
+JOB_NAME,JOB_DIR,JOB_DESC,SHELL_PATH
+SG01001A,batch/unit/setting_data_loader/,設定ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/setting_data_loader/SG01001A.sh
+SG01002A,batch/unit/setting_data_loader/,設定ファイル読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/setting_data_loader/SG01002A.sh
+SG01003A,batch/unit/setting_data_loader/,設定ファイルデータ整形一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/setting_data_loader/SG01003A.sh
+SG02001A,batch/unit/ekispert_data_fetcher/,駅すぱあと設定ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02001A.sh
+SG02002A,batch/unit/ekispert_data_fetcher/,駅すぱあと設定ファイル読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02002A.sh
+SG02003A,batch/unit/ekispert_data_fetcher/,駅すぱあと設定データ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02003A.sh
+SG02004A,batch/unit/ekispert_data_fetcher/,取得対象データ抽出,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02004A.sh
+SG02005A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPI実行用CSV出力,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02005A.sh
+SG02006A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIリクエスト実行,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02006A.sh
+SG02007A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02007A.sh
+SG02008A,batch/unit/ekispert_data_fetcher/,駅すぱあとレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02008A.sh
+SG02009A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02009A.sh
