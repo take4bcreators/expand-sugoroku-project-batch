@@ -5,7 +5,7 @@
 #   最後に / は入れない
 #########################
 
-# このプロジェクトのトップディレクトリのパス（.bash_profile で定義済み）
+# このプロジェクトのトップディレクトリのパス（profile で定義済み）
 PROJECT_BATCH_ROOT="${PROJECT_BATCH_ROOT}"
 # バッチディレクトリのパス
 export BATCH_DIR="${PROJECT_BATCH_ROOT}/batch"
@@ -25,8 +25,20 @@ export SHARED_DIR="${PROJECT_BATCH_ROOT}/shared"
 export SHELL_DIR="${BATCH_DIR}/script"
 # SQLファイルのあるディレクトリのパス
 export SQL_DIR="${BATCH_DIR}/sql"
+# JSファイルのあるディレクトリのパス
+export JS_DIR="${BATCH_DIR}/js"
 # 共通シェルのディレクトリのパス
 export COM_SHELL_DIR="${SHELL_DIR}/common"
+
+
+#########################
+# 他リポジトリの情報
+#########################
+
+# フロントリポジトリのトップディレクトリのパス（profile で定義済み）
+PROJECT_FRONT_ROOT="${PROJECT_FRONT_ROOT}"
+# フロントリポジトリ名（リポジトリのフルパスから取得）
+export FRONT_REPOSITORY_NAME=$(cd "${PROJECT_FRONT_ROOT}"; basename $(pwd))
 
 
 #########################
@@ -37,6 +49,8 @@ export COM_SHELL_DIR="${SHELL_DIR}/common"
 export COMMON_LIB_SH="${COM_SHELL_DIR}/common_function.sh"
 # 環境設定ファイルのパス
 export APP_ENV="${ENV_DIR}/app.env"
+# 共有ホームディレクトリのパス
+export PUB_HOME="/home/pub"
 
 
 #########################
@@ -98,6 +112,22 @@ export BOARD_DATA_JSON="${SHARED_DIR}/boards.json"
 export TMP_MINIGAME_DATA_JSON="${TMP_DIR}/tmp_sg04019a.json"
 # ミニゲームJSON
 export MINIGAMES_JSON="${SHARED_DIR}/minigames.json"
+
+# フロント資材コピー除外情報ファイル
+export FRONT_RSYNC_EXCLUDE_LIST="${CONFIG_DIR}/front_rsync_exclude_list.txt"
+# フロント資材コピー先ディレクトリ
+export FRONT_RSYNC_TO_DIR="${PUB_HOME}"
+# フロントリポジトリのJSON格納先ディレクトリ
+export FRONT_SAVE_JSON_DIR="${FRONT_RSYNC_TO_DIR}/${FRONT_REPOSITORY_NAME}/src/data"
+# gatsbyコマンドを使用してフロント資材をビルドするためのディレクトリ
+export EXEC_GATSBY_DIR="${FRONT_RSYNC_TO_DIR}/${FRONT_REPOSITORY_NAME}"
+# gatsbyの静的サイトデータ出力先のフォルダ名（zipコマンド実行時に必要）
+export GATSBY_PUBLIC_DIR_NAME="public"
+# gatsbyの静的サイトデータ出力先のフォルダパス
+export GATSBY_PUBLIC_DIR="${EXEC_GATSBY_DIR}/${GATSBY_PUBLIC_DIR_NAME}"
+# 静的サイトデータのZIPファイル
+export SITE_DATA_ZIP="${SHARED_DIR}/sitedata.zip"
+
 
 #########################
 # 走行設定
