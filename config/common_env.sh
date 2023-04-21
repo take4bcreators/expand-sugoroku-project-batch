@@ -62,6 +62,17 @@ export SEQ_FILES_EXT="???"
 
 
 #########################
+# サイトの設定
+#########################
+
+# 本番サイトのサイトID （https:// XXXX.netlify.app の https// を除いた部分）
+export NL_PRD_SITE_ID="extensionlab-temporally.netlify.app"
+
+# 検証サイトのサイトID （https:// XXXX.netlify.app の https// を除いた部分）
+export NL_DEV_SITE_ID="euphonious-belekoy-36e136.netlify.app"
+
+
+#########################
 # 処理別ファイルのパス
 #########################
 
@@ -125,8 +136,17 @@ export EXEC_GATSBY_DIR="${FRONT_RSYNC_TO_DIR}/${FRONT_REPOSITORY_NAME}"
 export GATSBY_PUBLIC_DIR_NAME="public"
 # gatsbyの静的サイトデータ出力先のフォルダパス
 export GATSBY_PUBLIC_DIR="${EXEC_GATSBY_DIR}/${GATSBY_PUBLIC_DIR_NAME}"
+# 静的サイトデータのZIPファイル名（名前単体をデプロイ時に使用）
+export SITE_DATA_ZIP_NAME="sitedata.zip"
 # 静的サイトデータのZIPファイル
-export SITE_DATA_ZIP="${SHARED_DIR}/sitedata.zip"
+export SITE_DATA_ZIP="${SHARED_DIR}/${SITE_DATA_ZIP_NAME}"
+
+# デプロイ時のレスポンス保存ファイル
+export TMP_DEPLOY_CURL_RES_LOG="${TMP_DIR}/deploy_response.json"
+# ステータス確認時のレスポンス保存ファイル
+export TMP_CHECK_STATUS_CURL_RES_LOG="${TMP_DIR}/check_status_response.json"
+# ステータス確認の最大試行回数
+export CHECK_STATUS_MAX_TRY_TIMES=11
 
 
 #########################
@@ -137,6 +157,13 @@ export SITE_DATA_ZIP="${SHARED_DIR}/sitedata.zip"
 export REMOVE_SHARED_TMP=0
 # export REMOVE_SHARED_TMP=1
 
+# 本番サイトへのデプロイするかのフラグ（1:本番サイトへデプロイ／0:開発サイトへデプロイ）
+export DEPLOY_TO_PRD_SITE=0
+# export DEPLOY_TO_PRD_SITE=1
+
+# データベースの使用スキーマ名
+export DB_SCHEMA="work"
+# export DB_SCHEMA="prd"
 
 
 #########################
@@ -147,8 +174,6 @@ export REMOVE_SHARED_TMP=0
 export DB_NAME="sgpjdb01"
 # データベースのユーザ名
 export DB_USER="sugoroku"
-# データベースの使用スキーマ名
-export DB_SCHEMA="work"
 
 
 #########################
