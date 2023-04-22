@@ -11,3 +11,13 @@ SG02006A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIリクエスト実�
 SG02007A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02007A.sh
 SG02008A,batch/unit/ekispert_data_fetcher/,駅すぱあとレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02008A.sh
 SG02009A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02009A.sh
+SG03001A,batch/unit/hotpepper_data_fetcher/,ホットペッパー設定ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03001A.sh
+SG03002A,batch/unit/hotpepper_data_fetcher/,ホットペッパー設定ファイル読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03002A.sh
+SG03003A,batch/unit/hotpepper_data_fetcher/,駅すぱあとデータ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03003A.sh
+SG03004A,batch/unit/hotpepper_data_fetcher/,ホットペッパーリクエストデータ抽出,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03004A.sh
+SG03005A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPI実行用CSV出力,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03005A.sh
+SG03006A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIリクエスト実行,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03006A.sh
+SG03007A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03007A.sh
+SG03008A,batch/unit/hotpepper_data_fetcher/,ホットペッパーレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03008A.sh
+SG03009A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03009A.sh
+
