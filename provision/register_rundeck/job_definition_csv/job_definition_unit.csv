@@ -20,4 +20,26 @@ SG03006A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIリクエス
 SG03007A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03007A.sh
 SG03008A,batch/unit/hotpepper_data_fetcher/,ホットペッパーレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03008A.sh
 SG03009A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03009A.sh
+SG04001A,batch/unit/site_content_creator/,ボードイベント定義ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04001A.sh
+SG04002A,batch/unit/site_content_creator/,ボードイベント定義読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04002A.sh
+SG04003A,batch/unit/site_content_creator/,ミニゲーム情報ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04003A.sh
+SG04004A,batch/unit/site_content_creator/,ミニゲーム情報読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04004A.sh
+SG04005A,batch/unit/site_content_creator/,ボードイベントミニゲーム情報統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04005A.sh
+SG04006A,batch/unit/site_content_creator/,ホットペッパーデータ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04006A.sh
+SG04007A,batch/unit/site_content_creator/,ボードID付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04007A.sh
+SG04008A,batch/unit/site_content_creator/,ボード別コンテンツ作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04008A.sh
+SG04009A,batch/unit/site_content_creator/,ボード別コンテンツボードイベント付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04009A.sh
+SG04010A,batch/unit/site_content_creator/,ボード別コンテンツ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04010A.sh
+SG04011A,batch/unit/site_content_creator/,ボードベース定義ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04011A.sh
+SG04012A,batch/unit/site_content_creator/,ボードベース定義読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04012A.sh
+SG04013A,batch/unit/site_content_creator/,ボードベースデータ付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04013A.sh
+SG04014A,batch/unit/site_content_creator/,スタートゴール情報付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04014A.sh
+SG04015A,batch/unit/site_content_creator/,コンテンツデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04015A.sh
+SG04016A,batch/unit/site_content_creator/,コンテンツデータJSON作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04016A.sh
+SG04017A,batch/unit/site_content_creator/,コンテンツデータJSON出力,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04017A.sh
+SG04018A,batch/unit/site_content_creator/,コンテンツデータJSON整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04018A.sh
+SG04019A,batch/unit/site_content_creator/,ミニゲームデータJSON作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04019A.sh
+SG04020A,batch/unit/site_content_creator/,ミニゲームデータJSON出力,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04020A.sh
+SG04021A,batch/unit/site_content_creator/,ミニゲームデータJSON整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04021A.sh
+SG04022A,batch/unit/site_content_creator/,サイトページコンテンツ作成処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04022A.sh
 
