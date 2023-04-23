@@ -50,5 +50,4 @@ SG05005A,batch/unit/static_site_builder/,静的サイトデータビルド,/mnt/
 SG05006A,batch/unit/static_site_builder/,盤面ページPDF生成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05006A.sh
 SG05007A,batch/unit/static_site_builder/,静的サイトデータZIP作成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05007A.sh
 SG06001A,batch/unit/site_deployer/,サイトデプロイ,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06001A.sh
-SG06002A,batch/unit/site_deployer/,サイトステータスレポート出力,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06002A.sh
-
+SG06002A,batch/unit/site_deployer/,デプロイステータス確認,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06002A.sh

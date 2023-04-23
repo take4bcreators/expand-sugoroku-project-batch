@@ -2,6 +2,6 @@ JOB_NAME,JOB_DIR,JOB_DESC,REF_JOB_DIR
 SG01000A,batch/group/,設定ファイル読み込み,batch/unit/setting_data_loader/
 SG02000A,batch/group/,駅すぱあとAPIリクエスト作成・実行,batch/unit/ekispert_data_fetcher/
 SG03000A,batch/group/,ホットペッパーAPIリクエスト作成・実行,batch/unit/hotpepper_data_fetcher/
-SG04000A,batch/group/, サイトページコンテンツ作成,batch/unit/site_content_creator/
+SG04000A,batch/group/,サイトページコンテンツ作成,batch/unit/site_content_creator/
 SG05000A,batch/group/,静的サイトデータ出力,batch/unit/static_site_builder/
 SG06000A,batch/group/,サイト公開,batch/unit/site_deployer/
