@@ -11,3 +11,43 @@ SG02006A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIリクエスト実�
 SG02007A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02007A.sh
 SG02008A,batch/unit/ekispert_data_fetcher/,駅すぱあとレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02008A.sh
 SG02009A,batch/unit/ekispert_data_fetcher/,駅すぱあとAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/ekispert_data_fetcher/SG02009A.sh
+SG03001A,batch/unit/hotpepper_data_fetcher/,ホットペッパー設定ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03001A.sh
+SG03002A,batch/unit/hotpepper_data_fetcher/,ホットペッパー設定ファイル読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03002A.sh
+SG03003A,batch/unit/hotpepper_data_fetcher/,駅すぱあとデータ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03003A.sh
+SG03004A,batch/unit/hotpepper_data_fetcher/,ホットペッパーリクエストデータ抽出,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03004A.sh
+SG03005A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPI実行用CSV出力,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03005A.sh
+SG03006A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIリクエスト実行,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03006A.sh
+SG03007A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPIレスポンス集約,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03007A.sh
+SG03008A,batch/unit/hotpepper_data_fetcher/,ホットペッパーレスポンスデータ読込,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03008A.sh
+SG03009A,batch/unit/hotpepper_data_fetcher/,ホットペッパーAPI処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/hotpepper_data_fetcher/SG03009A.sh
+SG04001A,batch/unit/site_content_creator/,ボードイベント定義ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04001A.sh
+SG04002A,batch/unit/site_content_creator/,ボードイベント定義読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04002A.sh
+SG04003A,batch/unit/site_content_creator/,ミニゲーム情報ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04003A.sh
+SG04004A,batch/unit/site_content_creator/,ミニゲーム情報読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04004A.sh
+SG04005A,batch/unit/site_content_creator/,ボードイベントミニゲーム情報統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04005A.sh
+SG04006A,batch/unit/site_content_creator/,ホットペッパーデータ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04006A.sh
+SG04007A,batch/unit/site_content_creator/,ボードID付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04007A.sh
+SG04008A,batch/unit/site_content_creator/,ボード別コンテンツ作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04008A.sh
+SG04009A,batch/unit/site_content_creator/,ボード別コンテンツボードイベント付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04009A.sh
+SG04010A,batch/unit/site_content_creator/,ボード別コンテンツ統合,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04010A.sh
+SG04011A,batch/unit/site_content_creator/,ボードベース定義ファイルデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04011A.sh
+SG04012A,batch/unit/site_content_creator/,ボードベース定義読み込み,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04012A.sh
+SG04013A,batch/unit/site_content_creator/,ボードベースデータ付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04013A.sh
+SG04014A,batch/unit/site_content_creator/,スタートゴール情報付与,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04014A.sh
+SG04015A,batch/unit/site_content_creator/,コンテンツデータ整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04015A.sh
+SG04016A,batch/unit/site_content_creator/,コンテンツデータJSON作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04016A.sh
+SG04017A,batch/unit/site_content_creator/,コンテンツデータJSON出力,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04017A.sh
+SG04018A,batch/unit/site_content_creator/,コンテンツデータJSON整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04018A.sh
+SG04019A,batch/unit/site_content_creator/,ミニゲームデータJSON作成,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04019A.sh
+SG04020A,batch/unit/site_content_creator/,ミニゲームデータJSON出力,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04020A.sh
+SG04021A,batch/unit/site_content_creator/,ミニゲームデータJSON整形,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04021A.sh
+SG04022A,batch/unit/site_content_creator/,サイトページコンテンツ作成処理一時ファイル削除,/mnt/project/expand-sugoroku-project-batch/batch/script/site_content_creator/SG04022A.sh
+SG05001A,batch/unit/static_site_builder/,フロント資材コピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05001A.sh
+SG05002A,batch/unit/static_site_builder/,コンテンツJSONコピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05002A.sh
+SG05003A,batch/unit/static_site_builder/,ミニゲームJSONコピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05003A.sh
+SG05004A,batch/unit/static_site_builder/,Nodeモジュールインストール,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05004A.sh
+SG05005A,batch/unit/static_site_builder/,静的サイトデータビルド,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05005A.sh
+SG05006A,batch/unit/static_site_builder/,盤面ページPDF生成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05006A.sh
+SG05007A,batch/unit/static_site_builder/,静的サイトデータZIP作成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05007A.sh
+SG06001A,batch/unit/site_deployer/,サイトデプロイ,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06001A.sh
+SG06002A,batch/unit/site_deployer/,デプロイステータス確認,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06002A.sh
