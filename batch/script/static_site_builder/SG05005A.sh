@@ -77,41 +77,29 @@ logmsg ${LL_INFO} "実行開始"
 dumpinfo
 
 cd "${EXEC_GATSBY_DIR}"
-logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)"
+logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)" -o
 
-logmsg ${LL_INFO} "gatsby build 実行"
+logmsg ${LL_INFO} "gatsby build 実行" -o
 gatsby build > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
 return_code=$?
 
 # エラー判定
 if [ ${return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "gatsby build エラー"
-    logmsg ${LL_ERR} "gatsbyコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-    logmsg ${LL_ERR} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
-    echo "----- std out -----"
-    cat ${STD_OUT_FILE}
-    echo "----- err out -----"
-    cat ${STD_ERR_FILE}
-    echo "-------------------"
+    logmsg ${LL_ERR} "gatsby build エラー" -r
+    logmsg ${LL_ERR} "gatsbyコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+    logmsg ${LL_ERR} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
-    exit ${return_code}
+    exit 1
 fi
 
 # メッセージ出力
-logmsg ${LL_INFO} "gatsby build 終了"
-logmsg ${LL_INFO} "gatsbyコマンド戻り値：${return_code}"
-logmsg ${LL_INFO} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-logmsg ${LL_INFO} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
-echo "----- std out -----"
-cat ${STD_OUT_FILE}
-echo "----- err out -----"
-cat ${STD_ERR_FILE}
-echo "-------------------"
+logmsg ${LL_INFO} "gatsby build 終了" -o
+logmsg ${LL_INFO} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -o
+logmsg ${LL_INFO} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -o
 
-# 出力確認用ファイルの削除
+
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

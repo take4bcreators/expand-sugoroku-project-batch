@@ -79,22 +79,21 @@ dumpinfo
 
 # フラグのチェックとスキップ
 if [ -z "${REMOVE_SHARED_TMP}" ]; then
-    logmsg ${LL_ERR} "フラグの指定がありません"
-    logmsg ${LL_INFO} "フラグの状態：${REMOVE_SHARED_TMP}"
+    logmsg ${LL_ERR} "フラグの指定がありません" -r
+    logmsg ${LL_ERR} "フラグの状態：${REMOVE_SHARED_TMP}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 if [ "${REMOVE_SHARED_TMP}" = "0" ];then
-    logmsg ${LL_INFO} "削除処理をスキップします。フラグの状態：${REMOVE_SHARED_TMP}"
-    echo "削除処理をスキップします。フラグの状態：${REMOVE_SHARED_TMP}"
+    logmsg ${LL_INFO} "削除処理をスキップします。フラグの状態：${REMOVE_SHARED_TMP}" -o
     removetmp
     logmsg ${LL_INFO} "正常終了"
     exit 0
 fi
 if [ "${REMOVE_SHARED_TMP}" != "1" ];then
-    logmsg ${LL_ERR} "フラグの指定が正しくありません"
-    logmsg ${LL_INFO} "フラグの状態：${REMOVE_SHARED_TMP}"
+    logmsg ${LL_ERR} "フラグの指定が正しくありません" -r
+    logmsg ${LL_ERR} "フラグの状態：${REMOVE_SHARED_TMP}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -104,9 +103,9 @@ logmsg ${LL_INFO} "削除処理を行います。フラグの状態：${REMOVE_S
 
 # 情報出力・変数状況確認
 if [ -z "${remove_target_file_list}" ]; then
-    logmsg ${LL_ERR} "ファイル名の指定が正しくありません"
-    logmsg ${LL_ERR} "対象変数名：remove_target_file_list"
-    logmsg ${LL_ERR} "渡された値：${remove_target_file_list}"
+    logmsg ${LL_ERR} "ファイル名の指定が正しくありません" -r
+    logmsg ${LL_ERR} "対象変数名：remove_target_file_list" -r
+    logmsg ${LL_ERR} "渡された値：${remove_target_file_list}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -121,24 +120,21 @@ for remove_target_file in ${remove_target_file_list}; do
         rm "${remove_target_file}"
         return_code=$?
         if [ ${return_code} -ne 0 ]; then
-            logmsg ${LL_ERR} "ファイル削除でエラーが発生しました"
-            logmsg ${LL_ERR} "対象ファイル：${remove_target_file}"
+            logmsg ${LL_ERR} "ファイル削除でエラーが発生しました" -r
+            logmsg ${LL_ERR} "対象ファイル：${remove_target_file}" -r
             removetmp
             logmsg ${LL_ERR} "異常終了"
             exit 1
         fi
-        logmsg ${LL_INFO} "ファイルを削除しました：${remove_target_file}"
-        echo "ファイルを削除しました：${remove_target_file}"
+        logmsg ${LL_INFO} "ファイルを削除しました：${remove_target_file}" -o
         let remove_cnt++
     else
-        logmsg ${LL_INFO} "削除対象ファイルがありませんでした：${remove_target_file}"
-        echo "削除対象ファイルがありませんでした：${remove_target_file}"
+        logmsg ${LL_INFO} "削除対象ファイルがありませんでした：${remove_target_file}" -o
     fi
 done
 
 
-logmsg ${LL_INFO} "ファイル削除が完了しました。  指定ファイル数：${file_cnt}  削除数：${remove_cnt}"
-
+logmsg ${LL_INFO} "ファイル削除が完了しました。  指定ファイル数：${file_cnt}  削除数：${remove_cnt}" -o
 removetmp
 logmsg ${LL_INFO} "正常終了"
 exit 0

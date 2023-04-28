@@ -78,8 +78,8 @@ dumpinfo
 
 # コピー元ディレクトリの存在確認
 if [ ! -f "${BOARD_DATA_JSON}" ]; then
-    logmsg ${LL_ERR} "コピー元ファイルが存在しません"
-    logmsg ${LL_ERR} "コピー元ファイル：${BOARD_DATA_JSON}"
+    logmsg ${LL_ERR} "コピー元ファイルが存在しません" -r
+    logmsg ${LL_ERR} "コピー元ファイル：${BOARD_DATA_JSON}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -87,8 +87,8 @@ fi
 
 # コピー先ディレクトリの存在確認
 if [ ! -d "${FRONT_SAVE_JSON_DIR}" ]; then
-    logmsg ${LL_ERR} "コピー先ディレクトリが存在しません"
-    logmsg ${LL_ERR} "コピー先ディレクトリ：${FRONT_SAVE_JSON_DIR}"
+    logmsg ${LL_ERR} "コピー先ディレクトリが存在しません" -r
+    logmsg ${LL_ERR} "コピー先ディレクトリ：${FRONT_SAVE_JSON_DIR}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -102,21 +102,19 @@ return_code=$?
 
 # エラー判定
 if [ ${return_code} -ne 0 ] || [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_ERR} "JSONファイルコピーエラー"
-    logmsg ${LL_ERR} "cpコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "cpコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-    logmsg ${LL_ERR} "cpコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+    logmsg ${LL_ERR} "JSONファイルコピーエラー" -r
+    logmsg ${LL_ERR} "cpコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "cpコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+    logmsg ${LL_ERR} "cpコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
 # メッセージ出力
-cat ${STD_OUT_FILE}
-logmsg ${LL_INFO} "cpコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
+logmsg ${LL_INFO} "cpコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -o
 
-# 出力確認用ファイルの削除
+
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

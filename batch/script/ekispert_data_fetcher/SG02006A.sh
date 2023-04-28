@@ -87,7 +87,8 @@ if [ "${file_count}" -ne 0 ]; then
     return_code=$?
     logmsg ${LL_INFO} "ファイル削除後...\n$(ls ${TMP_EKISPERT_RESPONSE_JSONS} 2> /dev/null)"
     if [ ${return_code} -ne 0 ]; then
-        logmsg ${LL_ERR} "ファイル削除でエラーが発生しました"
+        logmsg ${LL_ERR} "ファイル削除エラー" -r
+        logmsg ${LL_ERR} "rmコマンド戻り値：${return_code}" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
         exit 1
@@ -105,8 +106,7 @@ for record in $(cat "${TMP_EKISPERT_REQUEST_CSV}" | sed '/^$/d'); do
     let record_cnt++
     st_name=$(echo "${record}" | awk -F ',' '{print $1}')
     st_code=$(echo "${record}" | awk -F ',' '{print $2}')
-    logmsg ${LL_INFO} "レコードカウント：$(printf '%-6s\n' ${record_cnt}) コード：$(printf '%-6s\n' ${st_code}) 駅名：${st_name}"
-    echo -e "レコードカウント：$(printf '%-6s\n' ${record_cnt}) コード：$(printf '%-6s\n' ${st_code}) 駅名：${st_name}"
+    logmsg ${LL_INFO} "レコードカウント：$(printf '%-6s\n' ${record_cnt}) コード：$(printf '%-6s\n' ${st_code}) 駅名：${st_name}" -o
     
     # st_code の有無でパラメータの指定を変更
     uri_param=""
@@ -133,10 +133,10 @@ for record in $(cat "${TMP_EKISPERT_REQUEST_CSV}" | sed '/^$/d'); do
     
     # エラー判定
     if [ ${return_code} -ne 0 ] || [ -s "${STD_ERR_FILE}" ]; then
-        logmsg ${LL_ERR} "curl実行エラー"
-        logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}"
-        logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-        logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+        logmsg ${LL_ERR} "curl実行エラー" -r
+        logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}" -r
+        logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+        logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
         exit 1
@@ -148,9 +148,9 @@ for record in $(cat "${TMP_EKISPERT_REQUEST_CSV}" | sed '/^$/d'); do
     
     # エラー判定
     if [ ${return_code} -ne 0 ] || [ -s "${STD_ERR_FILE}" ]; then
-        logmsg ${LL_ERR} "取得ファイル加工エラー"
-        logmsg ${LL_ERR} "jqコマンド戻り値：${return_code}"
-        logmsg ${LL_ERR} "jqコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+        logmsg ${LL_ERR} "取得ファイル加工エラー" -r
+        logmsg ${LL_ERR} "jqコマンド戻り値：${return_code}" -r
+        logmsg ${LL_ERR} "jqコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
         exit 1
@@ -158,11 +158,9 @@ for record in $(cat "${TMP_EKISPERT_REQUEST_CSV}" | sed '/^$/d'); do
 done
 
 logmsg ${LL_INFO} "駅すぱあとデータ取得完了"
-logmsg ${LL_INFO} "リクエスト実行数：${record_cnt}"
+logmsg ${LL_INFO} "リクエスト実行数：${record_cnt}" -o
 
 
-# 出力確認用ファイルの削除
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0
