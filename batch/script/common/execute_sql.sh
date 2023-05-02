@@ -79,8 +79,9 @@ dumpinfo
 exec_sql_file_path="${SQL_DIR}/${module_group_name}/${exec_sql_name}"
 # SQLファイル存在チェック
 if [ ! -f ${exec_sql_file_path} ]; then
-    logmsg ${LL_ERR} "ERROR 実行SQLファイルが存在しません"
-    logmsg ${LL_ERR} "指定されたファイル名：${exec_sql_file_path}"
+    logmsg ${LL_ERR} "ERROR 実行SQLファイルが存在しません" -r
+    logmsg ${LL_ERR} "指定されたファイル名：${exec_sql_file_path}" -r
+    logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
@@ -91,14 +92,13 @@ psql_return_code=$?
 
 # 標準出力をログへ出力
 if [ -s ${STD_OUT_FILE} ]; then
-    logmsg ${LL_INFO} "PSQL標準出力メッセージ...\n""$(cat ${STD_OUT_FILE})"
+    logmsg ${LL_INFO} "PSQL標準出力メッセージ...\n""$(cat ${STD_OUT_FILE})" -o
 else
     logmsg ${LL_INFO} "PSQL標準出力メッセージ なし"
 fi
 # エラー出力をログとコンソールへ出力
 if [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_INFO} "PSQLエラー出力メッセージ...\n""$(cat ${STD_ERR_FILE})"
-    cat ${STD_ERR_FILE}
+    logmsg ${LL_INFO} "PSQLエラー出力メッセージ...\n""$(cat ${STD_ERR_FILE})" -r
 fi
 
 # 出力確認用ファイルの削除
@@ -106,9 +106,9 @@ removetmp
 
 # SQLエラーチェック
 if [ ${psql_return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "PSQLエラー 戻り値：${psql_return_code}"
+    logmsg ${LL_ERR} "PSQLエラー 戻り値：${psql_return_code}" -r
     logmsg ${LL_ERR} "異常終了"
-    exit ${psql_return_code}
+    exit 1
 fi
 
 logmsg ${LL_INFO} "正常終了"

@@ -79,8 +79,8 @@ dumpinfo
 
 # サイトデータZIPファイルの存在確認
 if [ ! -f "${SITE_DATA_ZIP}" ]; then
-    logmsg ${LL_ERR} "サイトデータZIPファイルが存在しません"
-    logmsg ${LL_ERR} "ファイルパス：${SITE_DATA_ZIP}"
+    logmsg ${LL_ERR} "サイトデータZIPファイルが存在しません" -r
+    logmsg ${LL_ERR} "ファイルパス：${SITE_DATA_ZIP}" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
@@ -89,19 +89,17 @@ fi
 nl_site_id=""
 case ${DEPLOY_TO_PRD_SITE} in
     0)
-        echo "デプロイ先：開発サイト"
-        logmsg ${LL_INFO} "デプロイ先：開発サイト"
+        logmsg ${LL_INFO} "デプロイ先：開発サイト" -o
         nl_site_id="${NL_DEV_SITE_ID}"
-    ;;
+        ;;
     1)
-        echo "デプロイ先：本番サイト"
-        logmsg ${LL_INFO} "デプロイ先：本番サイト"
+        logmsg ${LL_INFO} "デプロイ先：本番サイト" -o
         nl_site_id="${NL_PRD_SITE_ID}"
-    ;;
+        ;;
 esac
 if [ -z "${nl_site_id}" ]; then
-    logmsg ${LL_ERR} "サイトIDの設定で想定外のエラーが発生しました"
-    logmsg ${LL_ERR} "サイトID：${nl_site_id}"
+    logmsg ${LL_ERR} "サイトIDの設定で想定外のエラーが発生しました" -r
+    logmsg ${LL_ERR} "サイトID：${nl_site_id}" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
@@ -109,8 +107,8 @@ fi
 # 必須変数の存在確認
 ## デプロイ時のレスポンス保存ファイル
 if [ -z "${TMP_DEPLOY_CURL_RES_LOG}" ]; then
-    logmsg ${LL_ERR} "必要な環境変数が設定されていません"
-    logmsg ${LL_ERR} "対象：TMP_DEPLOY_CURL_RES_LOG"
+    logmsg ${LL_ERR} "必要な環境変数が設定されていません" -r
+    logmsg ${LL_ERR} "対象：TMP_DEPLOY_CURL_RES_LOG" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
@@ -118,14 +116,14 @@ fi
 
 # サイトデータZIPファイルの格納先へ移動
 cd "${SHARED_DIR}"
-logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)"
+logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)" -o
 
 # リクエスト情報ログ出力
 logmsg ${LL_INFO} "実行リクエスト...
 curl -Ss -X POST -H \"Content-Type: application/zip\"
                  -H \"Authorization: Bearer XXXXXX\"
                  --data-binary \"@${SITE_DATA_ZIP_NAME}\"
-                 \"https://api.netlify.com/api/v1/sites/${nl_site_id}/deploys\""
+                 \"https://api.netlify.com/api/v1/sites/${nl_site_id}/deploys\"" -o
 
 # デプロイ実行
 curl -Ss -X POST -H "Content-Type: application/zip" \
@@ -137,10 +135,10 @@ return_code=$?
 
 # curlのエラーが発生している場合は異常終了
 if [ ${return_code} -ne 0 ] && [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_ERR} "Netlify APIリクエスト実行エラー"
-    logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${TMP_DEPLOY_CURL_RES_LOG})"
-    logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+    logmsg ${LL_ERR} "Netlify APIリクエスト実行エラー" -r
+    logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${TMP_DEPLOY_CURL_RES_LOG})" -r
+    logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -175,20 +173,18 @@ site_status="
 "
 
 # ログ出力
-echo "${site_status}"
-logmsg ${LL_INFO} "デプロイ情報...${site_status}"
+logmsg ${LL_INFO} "デプロイ情報...${site_status}" -o
 
 # レスポンスのステータスの文言で成功判定
 if [ "${dep_res_status}" != "uploaded" ]; then
-    logmsg ${LL_ERR} "デプロイステータスが uploaded ではありません"
-    logmsg ${LL_ERR} "デプロイステータス：${dep_res_status}"
+    logmsg ${LL_ERR} "デプロイステータスが uploaded ではありません" -r
+    logmsg ${LL_ERR} "デプロイステータス：${dep_res_status}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
-# 出力確認用ファイルの削除
-removetmp
 
+removetmp
 logmsg ${LL_INFO} "正常終了"
 exit 0

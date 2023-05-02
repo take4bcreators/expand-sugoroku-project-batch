@@ -1,6 +1,24 @@
 # 共通設定ファイル
 
 #########################
+# 走行設定
+#########################
+
+# 共有一時ファイルをジョブで削除するかのフラグ（1:削除する／0:削除しない）
+export REMOVE_SHARED_TMP="0"
+# export REMOVE_SHARED_TMP="1"
+
+# 本番サイトへのデプロイするかのフラグ（1:本番サイトへデプロイ／0:開発サイトへデプロイ）
+export DEPLOY_TO_PRD_SITE="0"
+# export DEPLOY_TO_PRD_SITE="1"
+
+# データベースの使用スキーマ名
+export DB_SCHEMA="work"
+# export DB_SCHEMA="prd"
+
+
+
+#########################
 # ディレクトリのパス
 #   最後に / は入れない
 #########################
@@ -147,23 +165,6 @@ export TMP_DEPLOY_CURL_RES_LOG="${TMP_DIR}/deploy_response.json"
 export TMP_CHECK_STATUS_CURL_RES_LOG="${TMP_DIR}/check_status_response.json"
 # ステータス確認の最大試行回数
 export CHECK_STATUS_MAX_TRY_TIMES=11
-
-
-#########################
-# 走行設定
-#########################
-
-# 共有一時ファイルをジョブで削除するかのフラグ（1:削除する／0:削除しない）
-export REMOVE_SHARED_TMP=0
-# export REMOVE_SHARED_TMP=1
-
-# 本番サイトへのデプロイするかのフラグ（1:本番サイトへデプロイ／0:開発サイトへデプロイ）
-export DEPLOY_TO_PRD_SITE=0
-# export DEPLOY_TO_PRD_SITE=1
-
-# データベースの使用スキーマ名
-export DB_SCHEMA="work"
-# export DB_SCHEMA="prd"
 
 
 #########################

@@ -79,8 +79,8 @@ dumpinfo
 
 # デプロイ時のレスポンス保存ファイルの存在確認
 if [ ! -f "${TMP_DEPLOY_CURL_RES_LOG}" ]; then
-    logmsg ${LL_ERR} "デプロイレスポンスファイルが存在しません"
-    logmsg ${LL_ERR} "ファイルパス：${TMP_DEPLOY_CURL_RES_LOG}"
+    logmsg ${LL_ERR} "デプロイレスポンスファイルが存在しません" -r
+    logmsg ${LL_ERR} "ファイルパス：${TMP_DEPLOY_CURL_RES_LOG}" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
@@ -88,15 +88,15 @@ fi
 # 必須変数の存在確認
 ## ステータス確認時のレスポンス保存ファイル
 if [ -z "${TMP_CHECK_STATUS_CURL_RES_LOG}" ]; then
-    logmsg ${LL_ERR} "必要な環境変数が設定されていません"
-    logmsg ${LL_ERR} "対象：TMP_CHECK_STATUS_CURL_RES_LOG"
+    logmsg ${LL_ERR} "必要な環境変数が設定されていません" -r
+    logmsg ${LL_ERR} "対象：TMP_CHECK_STATUS_CURL_RES_LOG" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 ## ステータス確認の最大試行回数
 if [ -z "${CHECK_STATUS_MAX_TRY_TIMES}" ]; then
-    logmsg ${LL_ERR} "必要な環境変数が設定されていません"
-    logmsg ${LL_ERR} "対象：CHECK_STATUS_MAX_TRY_TIMES"
+    logmsg ${LL_ERR} "必要な環境変数が設定されていません" -r
+    logmsg ${LL_ERR} "対象：CHECK_STATUS_MAX_TRY_TIMES" -r
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
@@ -106,9 +106,9 @@ fi
 deploy_id=$(jq -r '.id' "${TMP_DEPLOY_CURL_RES_LOG}")
 return_code=$?
 if [ ${return_code} -ne 0 ] || [ -z "${deploy_id}" ]; then
-    logmsg ${LL_ERR} "デプロイID取得エラー"
-    logmsg ${LL_ERR} "コマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "デプロイID：${deploy_id}"
+    logmsg ${LL_ERR} "デプロイID取得エラー" -r
+    logmsg ${LL_ERR} "コマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "デプロイID：${deploy_id}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -117,15 +117,13 @@ fi
 # リクエスト情報ログ出力
 logmsg ${LL_INFO} "実行リクエスト...
 curl -Ss -X GET -H \"Authorization: Bearer XXXXXX\"
-                \"https://api.netlify.com/api/v1/deploys/${deploy_id}\""
+                \"https://api.netlify.com/api/v1/deploys/${deploy_id}\"" -o
 
 
 # 自動リトライのためのループ
 logmsg ${LL_INFO} "Netlifyデプロイステータス確認開始 最大試行回数：${CHECK_STATUS_MAX_TRY_TIMES}"
-echo "Netlifyデプロイステータス確認開始 最大試行回数：${CHECK_STATUS_MAX_TRY_TIMES}"
 for try_times in $(seq 1 ${CHECK_STATUS_MAX_TRY_TIMES});do
     logmsg ${LL_INFO} "Netlifyデプロイステータス確認 [${try_times}回目]"
-    echo "Netlifyデプロイステータス確認 [${try_times}回目]"
     
     # デプロイステータス取得実行
     curl -Ss -X GET -H "Authorization: Bearer ${NL_TOKEN}" \
@@ -135,10 +133,10 @@ for try_times in $(seq 1 ${CHECK_STATUS_MAX_TRY_TIMES});do
 
     # curlのエラーが発生している場合は異常終了
     if [ ${return_code} -ne 0 ] && [ -s ${STD_ERR_FILE} ]; then
-        logmsg ${LL_ERR} "Netlify APIリクエスト実行エラー"
-        logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}"
-        logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${TMP_CHECK_STATUS_CURL_RES_LOG})"
-        logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+        logmsg ${LL_ERR} "Netlify APIリクエスト実行エラー" -r
+        logmsg ${LL_ERR} "curlコマンド戻り値：${return_code}" -r
+        logmsg ${LL_ERR} "curlコマンド標準出力メッセージ...\n$(cat ${TMP_CHECK_STATUS_CURL_RES_LOG})" -r
+        logmsg ${LL_ERR} "curlコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
         exit 1
@@ -146,28 +144,26 @@ for try_times in $(seq 1 ${CHECK_STATUS_MAX_TRY_TIMES});do
     
     # デプロイステータスを取得
     deploy_state=$(jq -r '.state' "${TMP_CHECK_STATUS_CURL_RES_LOG}")
-    echo "デプロイステータス：${deploy_state}"
-    logmsg ${LL_INFO} "デプロイステータス：${deploy_state}"
+    logmsg ${LL_INFO} "デプロイステータス：${deploy_state}" -o
     case "${deploy_state}" in
         "null" | "")
-            logmsg ${LL_ERR} "デプロイステータス取得エラー"
-            logmsg ${LL_ERR} "デプロイステータス：${deploy_state}"
+            logmsg ${LL_ERR} "デプロイステータス取得エラー" -r
+            logmsg ${LL_ERR} "デプロイステータス：${deploy_state}" -r
             removetmp
             logmsg ${LL_ERR} "異常終了"
             exit 1
-        ;;
+            ;;
         "ready")
             logmsg ${LL_INFO} "デプロイステータス問題なし"
             break
-        ;;
+            ;;
     esac
     
     logmsg ${LL_INFO} "デプロイステータスが ready ではありません"
     
     # 最大リトライ関数に達している場合は、異常終了
     if [ ${try_times} -eq ${CHECK_STATUS_MAX_TRY_TIMES} ]; then
-        echo "ステータス確認の最大試行回数に達しました"
-        logmsg ${LL_ERR} "ステータス確認の最大試行回数に達しました"
+        logmsg ${LL_ERR} "ステータス確認の最大試行回数に達しました" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
         exit 1
@@ -175,16 +171,12 @@ for try_times in $(seq 1 ${CHECK_STATUS_MAX_TRY_TIMES});do
     
     # リトライ前スリープの実行
     sleepsec="$(( 2 ** (${try_times} - 1) ))"
-    echo "Netlifyデプロイステータス確認 リトライ前スリープ開始  時間： ${sleepsec} 秒"
     logmsg ${LL_INFO} "Netlifyデプロイステータス確認 リトライ前スリープ開始  時間： ${sleepsec} 秒"
     sleep ${sleepsec}
-    echo "Netlifyデプロイステータス確認 リトライ前スリープ終了"
     logmsg ${LL_INFO} "Netlifyデプロイステータス確認 リトライ前スリープ終了"
 done
 
 
-# 出力確認用ファイルの削除
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

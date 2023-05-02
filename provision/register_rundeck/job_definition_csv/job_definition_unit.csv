@@ -45,9 +45,8 @@ SG04022A,batch/unit/site_content_creator/,サイトページコンテンツ作�
 SG05001A,batch/unit/static_site_builder/,フロント資材コピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05001A.sh
 SG05002A,batch/unit/static_site_builder/,コンテンツJSONコピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05002A.sh
 SG05003A,batch/unit/static_site_builder/,ミニゲームJSONコピー,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05003A.sh
-SG05004A,batch/unit/static_site_builder/,Nodeモジュールインストール,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05004A.sh
+SG05004A,batch/unit/static_site_builder/,Gatsby使用モジュールインストール,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05004A.sh
 SG05005A,batch/unit/static_site_builder/,静的サイトデータビルド,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05005A.sh
-SG05006A,batch/unit/static_site_builder/,盤面ページPDF生成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05006A.sh
-SG05007A,batch/unit/static_site_builder/,静的サイトデータZIP作成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05007A.sh
+SG05006A,batch/unit/static_site_builder/,静的サイトデータZIP作成,/mnt/project/expand-sugoroku-project-batch/batch/script/static_site_builder/SG05006A.sh
 SG06001A,batch/unit/site_deployer/,サイトデプロイ,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06001A.sh
 SG06002A,batch/unit/site_deployer/,デプロイステータス確認,/mnt/project/expand-sugoroku-project-batch/batch/script/site_deployer/SG06002A.sh

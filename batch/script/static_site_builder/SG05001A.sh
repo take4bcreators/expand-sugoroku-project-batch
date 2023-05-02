@@ -79,8 +79,8 @@ dumpinfo
 
 # コピー元ディレクトリの存在確認
 if [ ! -d "${PROJECT_FRONT_ROOT}" ]; then
-    logmsg ${LL_ERR} "コピー元ディレクトリが存在しません"
-    logmsg ${LL_ERR} "コピー元ディレクトリ：${PROJECT_FRONT_ROOT}"
+    logmsg ${LL_ERR} "コピー元ディレクトリが存在しません" -r
+    logmsg ${LL_ERR} "コピー元ディレクトリ：${PROJECT_FRONT_ROOT}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -88,8 +88,8 @@ fi
 
 # コピー先ディレクトリの存在確認
 if [ ! -d "${FRONT_RSYNC_TO_DIR}" ]; then
-    logmsg ${LL_ERR} "コピー先ディレクトリが存在しません"
-    logmsg ${LL_ERR} "コピー先ディレクトリ：${FRONT_RSYNC_TO_DIR}"
+    logmsg ${LL_ERR} "コピー先ディレクトリが存在しません" -r
+    logmsg ${LL_ERR} "コピー先ディレクトリ：${FRONT_RSYNC_TO_DIR}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -97,8 +97,8 @@ fi
 
 # コピー除外情報ファイルの存在確認
 if [ ! -f "${FRONT_RSYNC_EXCLUDE_LIST}" ]; then
-    logmsg ${LL_ERR} "コピー除外情報ファイルが存在しません"
-    logmsg ${LL_ERR} "コピー除外情報ファイル：${FRONT_RSYNC_EXCLUDE_LIST}"
+    logmsg ${LL_ERR} "コピー除外情報ファイルが存在しません" -r
+    logmsg ${LL_ERR} "コピー除外情報ファイル：${FRONT_RSYNC_EXCLUDE_LIST}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -110,21 +110,19 @@ return_code=$?
 
 # エラー判定
 if [ ${return_code} -ne 0 ] || [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_ERR} "フロント資材コピーエラー"
-    logmsg ${LL_ERR} "rsyncコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "rsyncコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-    logmsg ${LL_ERR} "rsyncコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+    logmsg ${LL_ERR} "フロント資材コピーエラー" -r
+    logmsg ${LL_ERR} "rsyncコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "rsyncコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+    logmsg ${LL_ERR} "rsyncコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
 # メッセージ出力
-cat ${STD_OUT_FILE}
-logmsg ${LL_INFO} "rsyncコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
+logmsg ${LL_INFO} "rsyncコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -o
 
-# 出力確認用ファイルの削除
+
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

@@ -81,9 +81,10 @@ dumpinfo
 : > "${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
 return_code=$?
 if [ ${return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "レスポンス集約用TSVの初期化でエラーが発生しました"
-    logmsg ${LL_ERR} "「:」コマンドリダイレクト戻り値：${status}"
-    logmsg ${LL_ERR} "TSVファイルパス：${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}"
+    logmsg ${LL_ERR} "レスポンス集約用TSVファイル初期化エラー" -r
+    logmsg ${LL_ERR} "「:」コマンドリダイレクト戻り値：${status}" -r
+    logmsg ${LL_ERR} "TSVファイルパス：${TMP_HOTPEPPER_RESPONSE_JOIN_TSV}" -r
+    logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
@@ -98,7 +99,7 @@ if [ "${file_count}" -gt 0 ]; then
         store_type=$(sed -n ${index}p "${TMP_HOTPEPPER_REQUEST_CSV}" | awk -F ',' '{print $2}')
         # 対象の駅名に対応するレスポンスJSONファイルのパス
         responsefile=$(ls ${TMP_HOTPEPPER_RESPONSE_JSONS} | sed -n ${index}p)
-        logmsg ${LL_INFO} "集約対象 … 店タイプ：$(printf '%-16s\n' ${store_type}) 駅名：${station_name}"
+        logmsg ${LL_INFO} "集約対象 … 店タイプ：$(printf '%-16s\n' ${store_type}) 駅名：${station_name}" -o
         
         
         # jqクエリ分岐とスキップのためにデータ件数を取得して分岐
@@ -106,12 +107,12 @@ if [ "${file_count}" -gt 0 ]; then
         jq_query=""
         # 0件、該当キーがない場合はスキップ
         if [ "${response_data_cnt}" = "0" ] || [ "${response_data_cnt}" = "null" ]; then
-            logmsg ${LL_WARN} "レスポンスデータがありません。スキップします"
+            logmsg ${LL_WARN} "レスポンスデータがありません。スキップします" -o
             continue
         fi
         # 結果件数が数値でない場合もスキップ（そのようなデータがあるかは未確認）
         if [[ ! "${response_data_cnt}" =~ ^[0-9]+$ ]]; then
-            logmsg ${LL_WARN} "レスポンスデータ件数が数値ではありません。スキップします"
+            logmsg ${LL_WARN} "レスポンスデータ件数が数値ではありません。スキップします" -o
             continue
         fi
         
@@ -144,12 +145,12 @@ if [ "${file_count}" -gt 0 ]; then
             
             # エラー判定
             if [ ${total_return_code} -ne 0 ] || [ -s "${STD_ERR_FILE}" ]; then
-                logmsg ${LL_ERR} "集約処理実行エラー"
-                logmsg ${LL_ERR} "catコマンド戻り値：${return_codes[0]}"
-                logmsg ${LL_ERR} " jqコマンド戻り値：${return_codes[1]}"
-                logmsg ${LL_ERR} "sedコマンド戻り値：${return_codes[2]}"
-                logmsg ${LL_ERR} "awkコマンド戻り値：${return_codes[3]}"
-                logmsg ${LL_ERR} "コマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+                logmsg ${LL_ERR} "集約処理実行エラー" -r
+                logmsg ${LL_ERR} "catコマンド戻り値：${return_codes[0]}" -r
+                logmsg ${LL_ERR} " jqコマンド戻り値：${return_codes[1]}" -r
+                logmsg ${LL_ERR} "sedコマンド戻り値：${return_codes[2]}" -r
+                logmsg ${LL_ERR} "awkコマンド戻り値：${return_codes[3]}" -r
+                logmsg ${LL_ERR} "コマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
                 removetmp
                 logmsg ${LL_ERR} "異常終了"
                 exit 1
@@ -158,12 +159,10 @@ if [ "${file_count}" -gt 0 ]; then
     done
     logmsg ${LL_INFO} "レスポンスデータ集約完了"
 else
-    logmsg ${LL_WARN} "ホットペッパーAPIレスポンス一時JSONファイルがありませんでした"
+    logmsg ${LL_WARN} "ホットペッパーAPIレスポンス一時JSONファイルがありませんでした" -o
 fi
 
 
-# 出力確認用ファイルの削除
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

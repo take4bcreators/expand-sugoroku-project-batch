@@ -79,8 +79,8 @@ dumpinfo
 
 # ZIP化対象のディレクトリの存在確認
 if [ ! -d "${GATSBY_PUBLIC_DIR}" ]; then
-    logmsg ${LL_ERR} "コピー元ディレクトリが存在しません"
-    logmsg ${LL_ERR} "コピー元ディレクトリ：${GATSBY_PUBLIC_DIR}"
+    logmsg ${LL_ERR} "コピー元ディレクトリが存在しません" -r
+    logmsg ${LL_ERR} "コピー元ディレクトリ：${GATSBY_PUBLIC_DIR}" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -88,72 +88,52 @@ fi
 
 # 既存のZIPの存在確認と削除
 if [ -f "${SITE_DATA_ZIP}" ]; then
-    logmsg ${LL_INFO} "既存のZIPファイルを削除します"
-    logmsg ${LL_INFO} "既存対象：${SITE_DATA_ZIP}"
+    logmsg ${LL_INFO} "既存のZIPファイルを削除します" -o
+    logmsg ${LL_INFO} "既存対象：${SITE_DATA_ZIP}" -o
     rm "${SITE_DATA_ZIP}" > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
     return_code=$?
     if [ ${return_code} -ne 0 ]; then
-        logmsg ${LL_ERR} "既存ZIP削除エラー"
-        logmsg ${LL_ERR} "rmコマンド戻り値：${status}"
-        logmsg ${LL_ERR} "rmコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-        logmsg ${LL_ERR} "rmコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
-        echo "----- std out -----"
-        cat ${STD_OUT_FILE}
-        echo "----- err out -----"
-        cat ${STD_ERR_FILE}
-        echo "-------------------"
+        logmsg ${LL_ERR} "既存ZIP削除エラー" -r
+        logmsg ${LL_ERR} "rmコマンド戻り値：${status}" -r
+        logmsg ${LL_ERR} "rmコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+        logmsg ${LL_ERR} "rmコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
         removetmp
         logmsg ${LL_ERR} "異常終了"
-        exit ${return_code}
+        exit 1
     fi
-    logmsg ${LL_INFO} "既存のZIPファイル削除完了"
+    logmsg ${LL_INFO} "既存のZIPファイル削除完了" -o
 fi
 
 # ディレクトリを移動
 cd "${EXEC_GATSBY_DIR}"
-logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)"
+logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)" -o
 
 # ZIP化実行
 # （書式）zip ZIP化後ファイル名 -r 対象ディレクトリ
 # zip内の階層を浅くするため、対象ディレクトリは 相対パス で指定
-logmsg ${LL_INFO} "zipコマンド実行"
+logmsg ${LL_INFO} "zipコマンド実行" -o
 zip "${SITE_DATA_ZIP}" -r "${GATSBY_PUBLIC_DIR_NAME}" > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
 return_code=$?
 
 # エラー判定
 if [ ${return_code} -ne 0 ]; then
     logmsg ${LL_ERR} "zipコマンド実行エラー"
-    logmsg ${LL_ERR} "zipコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "zipコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-    logmsg ${LL_ERR} "zipコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
-    echo "----- std out -----"
-    cat ${STD_OUT_FILE}
-    echo "----- err out -----"
-    cat ${STD_ERR_FILE}
-    echo "-------------------"
+    logmsg ${LL_ERR} "zipコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "zipコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+    logmsg ${LL_ERR} "zipコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
-    exit ${return_code}
+    exit 1
 fi
 
 # メッセージ出力
-logmsg ${LL_INFO} "zipコマンド終了"
-logmsg ${LL_INFO} "zipコマンド戻り値：${return_code}"
-logmsg ${LL_INFO} "zipコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})"
-logmsg ${LL_INFO} "zipコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
-echo "----- std out -----"
-cat ${STD_OUT_FILE}
-echo "----- err out -----"
-cat ${STD_ERR_FILE}
-echo "-------------------"
+logmsg ${LL_INFO} "zipコマンド終了" -o
+logmsg ${LL_INFO} "zipコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -o
+logmsg ${LL_INFO} "zipコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -o
+logmsg ${LL_INFO} "コピー元ディレクトリ：${GATSBY_PUBLIC_DIR}" -o
+logmsg ${LL_INFO} "作成ZIPファイルのパス：${SITE_DATA_ZIP}" -o
 
 
-# 出力確認用ファイルの削除
 removetmp
-
-echo "コピー元ディレクトリ：${GATSBY_PUBLIC_DIR}"
-echo "作成ZIPファイルのパス：${SITE_DATA_ZIP}"
-logmsg ${LL_ERR} "コピー元ディレクトリ：${GATSBY_PUBLIC_DIR}"
-logmsg ${LL_INFO} "作成ZIPファイルのパス：${SITE_DATA_ZIP}"
 logmsg ${LL_INFO} "正常終了"
 exit 0

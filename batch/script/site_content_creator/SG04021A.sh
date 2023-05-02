@@ -82,9 +82,9 @@ return_code=$?
 
 # エラー判定
 if [ ${return_code} -ne 0 ] || [ -s ${STD_ERR_FILE} ]; then
-    logmsg ${LL_ERR} "設定ファイル加工エラー"
-    logmsg ${LL_ERR} "awkコマンド戻り値：${return_code}"
-    logmsg ${LL_ERR} "awkコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+    logmsg ${LL_ERR} "ファイル加工エラー" -r
+    logmsg ${LL_ERR} "jqコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "jqコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
     removetmp
     logmsg ${LL_ERR} "異常終了"
     exit 1
@@ -93,8 +93,7 @@ fi
 # 一時ファイルからボードデータJSONに書き出し
 cat "${STD_OUT_FILE}" > "${MINIGAMES_JSON}"
 
-# 出力確認用ファイルの削除
-removetmp
 
+removetmp
 logmsg ${LL_INFO} "正常終了"
 exit 0

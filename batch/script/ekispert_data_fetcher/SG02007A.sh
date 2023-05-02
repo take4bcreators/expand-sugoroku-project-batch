@@ -81,9 +81,10 @@ dumpinfo
 : > "${TMP_EKISPERT_RESPONSE_JOIN_CSV}"
 return_code=$?
 if [ ${return_code} -ne 0 ]; then
-    logmsg ${LL_ERR} "レスポンス集約用CSVの初期化でエラーが発生しました"
-    logmsg ${LL_ERR} "「:」コマンドリダイレクト戻り値：${status}"
-    logmsg ${LL_ERR} "CSVファイルパス：${TMP_EKISPERT_RESPONSE_JOIN_CSV}"
+    logmsg ${LL_ERR} "レスポンス集約用CSVの初期化でエラーが発生しました" -r
+    logmsg ${LL_ERR} "「:」コマンドリダイレクト戻り値：${status}" -r
+    logmsg ${LL_ERR} "CSVファイルパス：${TMP_EKISPERT_RESPONSE_JOIN_CSV}" -r
+    logmsg ${LL_ERR} "異常終了"
     exit 1
 fi
 
@@ -97,7 +98,7 @@ if [ "${file_count}" -gt 0 ]; then
         station_name=$(sed -n ${index}p "${TMP_EKISPERT_REQUEST_CSV}" | awk -F ',' '{print $1}')
         # 対象の駅名に対応するレスポンスJSONファイルのパス
         responsefile=$(ls ${TMP_EKISPERT_RESPONSE_JSONS} | sed -n ${index}p)
-        logmsg ${LL_INFO} "集約対象：${station_name}"
+        logmsg ${LL_INFO} "集約対象：${station_name}" -o
         
         # jqクエリ分岐とスキップのためにデータ件数を取得して分岐
         #   レスポンスデータの件数が1件か複数件かで配列の有無が変化し、
@@ -125,12 +126,12 @@ if [ "${file_count}" -gt 0 ]; then
         
         # エラー判定
         if [ ${total_return_code} -ne 0 ] || [ -s "${STD_ERR_FILE}" ]; then
-            logmsg ${LL_ERR} "集約処理実行エラー"
-            logmsg ${LL_ERR} "catコマンド戻り値：${return_codes[0]}"
-            logmsg ${LL_ERR} " jqコマンド戻り値：${return_codes[1]}"
-            logmsg ${LL_ERR} "sedコマンド戻り値：${return_codes[2]}"
-            logmsg ${LL_ERR} "awkコマンド戻り値：${return_codes[3]}"
-            logmsg ${LL_ERR} "コマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})"
+            logmsg ${LL_ERR} "集約処理実行エラー" -r
+            logmsg ${LL_ERR} "catコマンド戻り値：${return_codes[0]}" -r
+            logmsg ${LL_ERR} " jqコマンド戻り値：${return_codes[1]}" -r
+            logmsg ${LL_ERR} "sedコマンド戻り値：${return_codes[2]}" -r
+            logmsg ${LL_ERR} "awkコマンド戻り値：${return_codes[3]}" -r
+            logmsg ${LL_ERR} "コマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
             removetmp
             logmsg ${LL_ERR} "異常終了"
             exit 1
@@ -138,12 +139,10 @@ if [ "${file_count}" -gt 0 ]; then
     done
     logmsg ${LL_INFO} "レスポンスデータ集約完了"
 else
-    logmsg ${LL_WARN} "駅すぱあとAPIレスポンス一時JSONファイルがありませんでした"
+    logmsg ${LL_WARN} "駅すぱあとAPIレスポンス一時JSONファイルがありませんでした" -o
 fi
 
 
-# 出力確認用ファイルの削除
 removetmp
-
 logmsg ${LL_INFO} "正常終了"
 exit 0

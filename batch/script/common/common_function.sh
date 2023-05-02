@@ -47,16 +47,82 @@ LOG_FILE_NAME="${local_log_dir}/${local_module_group_name}_$(date +%Y%m%d).log"
 # 【ログ出力用関数】
 #   [引数1] 重要度を示す変数 … ${LL_ERR} ${LL_WARN} ${LL_INFO} ${LL_DEBUG}
 #   [引数2] ログに出力するメッセージ
-#   [使用例] logmsg ${LL_INFO} "実行開始"
-#   [ログ出力例] 2022-01-01 10:01:36 INFO pid:3001 SGTS0001.sh 実行開始
+#   [オプション]
+#           -o, --out       : 標準出力にも出力する
+#           -r, --errout    : エラー出力にも出力する
+#           -f, --full      : -o または -r 指定時、
+#                             出力するメッセージにタイムスタンプなども含める
+#   [使用例]
+#           logmsg ${LL_INFO} "実行開始"
+#           logmsg ${LL_ERR} "エラー" -r
+#   [ログ出力例]
+#           2022-01-01 10:01:36 INFO  pid:3001 SGTS0001.sh 実行開始
+#           2022-01-01 10:01:36 ERROR pid:3001 SGTS0001.sh エラー
 function logmsg() {
+    # 標準出力・エラー出力判定用変数
+    local _use_std_out=false
+    local _use_err_out=false
+    local _full_out=false
+    
+    # 使用可能なオプションを指定
+    local _SHORTOPTS="orf"
+    local _LONGOPTS="out,errout,full"
+    
+    # オプション解析
+    # 引数解析時に awk を使用するため、引数内の改行は一旦 \n の文字列に変換してからオプション解析する
+    local _optargs=$(getopt -o "${_SHORTOPTS}" -l "${_LONGOPTS}" -- "$@")
+    _optargs=$(echo ${_optargs//$'\n'/'\n'})
+    for _optarg in ${_optargs}; do
+        case ${_optarg} in
+            -o|--out)
+                _use_std_out=true
+                ;;
+            -r|--errout)
+                _use_err_out=true
+                ;;
+            -f|--full)
+                _full_out=true
+                ;;
+            --)
+                break
+                ;;
+        esac
+    done
+    
+    # 引数を引数番号で解析
+    argnums=(0)
+    argnum=0
+    for arg in "$@"; do
+        let argnum++
+        case "${arg}" in
+            -*) : ;;
+            *)  argnums+=(${argnum}) ;;
+        esac
+    done
+    
+    # ログ出力のための情報を設定
     local _logdate="$(date '+%Y-%m-%d %H:%M:%S')"
-    local _pri=$1
+    local _pri="${!argnums[1]}"
     local _pid=$$
     local _shlname="${local_exec_shell_name}"
-    local _logmessage=$2
-    echo -e "${_logdate}${sep}${_pri}${sep}pid:${_pid}${sep}${_shlname}${sep}${_logmessage}"
-} >> ${LOG_FILE_NAME}
+    local _logmessage="${!argnums[2]}"
+    local _log="${_logdate}${sep}${_pri}${sep}pid:${_pid}${sep}${_shlname}${sep}${_logmessage}"
+    
+    # フラグの状態に応じて標準出力・エラー出力
+    if "${_use_err_out}" && "${_full_out}"; then
+        echo -e "${_log}" >&2
+    elif "${_use_err_out}"; then
+        echo -e "${_logmessage}" >&2
+    elif "${_use_std_out}" && "${_full_out}"; then
+        echo -e "${_log}"
+    elif "${_use_std_out}"; then
+        echo -e "${_logmessage}"
+    fi
+    
+    # ログファイルに出力
+    echo -e "${_log}" >> "${LOG_FILE_NAME}"
+    return 0
+}
 
 
 # 【情報出力用関数】
