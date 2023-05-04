@@ -1,0 +1,145 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "[03-01] Vagrantサーバー SSH接続 (127.0.0.1:2222)",
+      "detail": "VagrantサーバーにSSH接続します。",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "vm-connect"
+      },
+      "type": "shell",
+      "command": "${workspaceFolder}/../expand-sugoroku-project-server/script/mac/03_01_ssh_connect_nat.command",
+      "args": [],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": [],
+      "windows": {
+        "command": "${workspaceFolder}\\..\\expand-sugoroku-project-server\\script\\windows\\03_01_ssh_connect_nat.bat",
+        "args": [],
+        "options": {
+          "shell": {
+            "executable": "${env:windir}\\system32\\cmd.exe",
+            "args": ["/C"],
+          }
+        }
+      }
+    },
+    {
+      "label": "[03-02] Vagrantサーバー SSH接続 (192.168.60.10)",
+      "detail": "VagrantサーバーにSSH接続します。",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "vm-connect"
+      },
+      "type": "shell",
+      "command": "${workspaceFolder}/../expand-sugoroku-project-server/script/mac/03_02_ssh_connect_hostonlyadapter.command",
+      "args": [],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": [],
+      "windows": {
+        "command": "${workspaceFolder}\\..\\expand-sugoroku-project-server\\script\\windows\\03_02_ssh_connect_hostonlyadapter.bat",
+        "args": [],
+        "options": {
+          "shell": {
+            "executable": "${env:windir}\\system32\\cmd.exe",
+            "args": ["/C"],
+          }
+        }
+      }
+    },
+    {
+      "label": "[03-03] Vagrantサーバー Teraterm 接続 (127.0.0.1:2222)",
+      "detail": "Vagrantサーバーに Teraterm で接続します。Windows環境専用です",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "vm-connect"
+      },
+      "type": "shell",
+      "command": "これは Windows専用 タスクです",
+      "args": [],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": [],
+      "windows": {
+        "command": "${workspaceFolder}\\..\\expand-sugoroku-project-server\\script\\windows\\03_03_teraterm_connect_nat.bat",
+        "args": [],
+        "options": {
+          "shell": {
+            "executable": "${env:windir}\\system32\\cmd.exe",
+            "args": ["/C"],
+          }
+        }
+      }
+    },
+    {
+      "label": "[03-04] Vagrantサーバー Teraterm 接続 (192.168.60.10)",
+      "detail": "Vagrantサーバーに Teraterm で接続します。Windows環境専用です",
+      "icon": {
+        "color": "terminal.ansiGreen",
+        "id": "vm-connect"
+      },
+      "type": "shell",
+      "command": "echo 'これは Windows専用 タスクです'",
+      "args": [],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": [],
+      "windows": {
+        "command": "${workspaceFolder}\\..\\expand-sugoroku-project-server\\script\\windows\\03_04_teraterm_connect_hostonlyadapter.bat",
+        "args": [],
+        "options": {
+          "shell": {
+            "executable": "${env:windir}\\system32\\cmd.exe",
+            "args": ["/C"],
+          }
+        }
+      }
+    },
+    {
+      "label": "[04] Vagrantサーバー 状態確認",
+      "detail": "Vagrantサーバーの現在の状態を確認します",
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "vm-active"
+      },
+      "type": "shell",
+      "command": "${workspaceFolder}/../expand-sugoroku-project-server/script/mac/04_check_status.command",
+      "args": ["-y"],
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "clear": true,
+        "echo": true
+      },
+      "problemMatcher": [],
+      "windows": {
+        "command": "${workspaceFolder}\\..\\expand-sugoroku-project-server\\script\\windows\\04_check_status.bat",
+        "args": ["/Y"],
+        "options": {
+          "shell": {
+            "executable": "${env:windir}\\system32\\cmd.exe",
+            "args": ["/C"],
+          }
+        }
+      }
+    }
+  ]
+}

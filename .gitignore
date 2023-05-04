@@ -2,6 +2,8 @@
 env/*
 tmp/*
 private/*
+shared/*
+provision/register_rundeck/tmp/*
 *.log
 *.tmp
 *.env
@@ -15,6 +17,10 @@ private/*
 !.vscode/extensions.json
 *.code-workspace
 .history/
+
+# Nodejs
+node_modules
+
 
 # macOS
 .DS_Store

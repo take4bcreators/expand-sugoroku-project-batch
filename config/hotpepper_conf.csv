@@ -1,0 +1,4 @@
+station_name,store_type,hp_range,hp_genre,hp_count,hp_order,hp_keyword
+all,,3,,40,1,
+all,カフェ,3,G014,40,1,
+all,居酒屋,3,G001,40,1,
