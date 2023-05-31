@@ -153,6 +153,13 @@ for try_times in $(seq 1 ${CHECK_STATUS_MAX_TRY_TIMES});do
             logmsg ${LL_ERR} "異常終了"
             exit 1
             ;;
+        "error")
+            logmsg ${LL_ERR} "デプロイエラー" -r
+            logmsg ${LL_ERR} "デプロイステータス：${deploy_state}" -r
+            removetmp
+            logmsg ${LL_ERR} "異常終了"
+            exit 1
+            ;;
         "ready")
             logmsg ${LL_INFO} "デプロイステータス問題なし"
             break
