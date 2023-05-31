@@ -79,6 +79,30 @@ dumpinfo
 cd "${EXEC_GATSBY_DIR}"
 logmsg ${LL_INFO} "実行ディレクトリ：$(pwd)" -o
 
+
+# ビルド実行前に既存データを gatsby clean で削除する
+logmsg ${LL_INFO} "gatsby clean 実行" -o
+gatsby clean > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
+return_code=$?
+
+# エラー判定
+if [ ${return_code} -ne 0 ]; then
+    logmsg ${LL_ERR} "gatsby clean エラー" -r
+    logmsg ${LL_ERR} "gatsbyコマンド戻り値：${return_code}" -r
+    logmsg ${LL_ERR} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -r
+    logmsg ${LL_ERR} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -r
+    removetmp
+    logmsg ${LL_ERR} "異常終了"
+    exit 1
+fi
+
+# メッセージ出力
+logmsg ${LL_INFO} "gatsby clean 終了" -o
+logmsg ${LL_INFO} "gatsbyコマンド標準出力メッセージ...\n$(cat ${STD_OUT_FILE})" -o
+logmsg ${LL_INFO} "gatsbyコマンドエラーメッセージ...\n$(cat ${STD_ERR_FILE})" -o
+
+
+# gatsby build でビルドを実行する
 logmsg ${LL_INFO} "gatsby build 実行" -o
 gatsby build > "${STD_OUT_FILE}" 2> "${STD_ERR_FILE}"
 return_code=$?
