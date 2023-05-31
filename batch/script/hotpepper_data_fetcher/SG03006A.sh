@@ -118,7 +118,7 @@ for record in $(cat "${TMP_HOTPEPPER_REQUEST_CSV}" | sed '/^$/d'); do
     
     # リクエスト整形
     key_dummy_str="@@@@@@@@"
-    request_url="http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${key_dummy_str}&lat=${station_lat}&lng=${station_lon}&format=json"
+    request_url="https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${key_dummy_str}&lat=${station_lat}&lng=${station_lon}&format=json"
     if [ -n "${hp_range}" ]; then
         request_url="${request_url}&range=${hp_range}"
     fi
